@@ -1,4 +1,5 @@
 import React from 'react'
+import Navbar from './Navbar'
 
 type WrapperProps = {
   children: React.ReactNode
@@ -6,7 +7,9 @@ type WrapperProps = {
 
 const Wrapper = ({children}: WrapperProps) => {
   return (
-    <div>Wrapper</div>
+    <div>
+      <Navbar />
+    </div>
   )
 }
 
