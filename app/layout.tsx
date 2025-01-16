@@ -23,7 +23,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" data-theme="fantasy">
+    <html lang="en" data-theme="pastel">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >

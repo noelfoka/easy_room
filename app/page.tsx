@@ -1,8 +1,11 @@
+import React from 'react'
 
-export default function Home() {
+const page = () => {
   return (
-    <div>
-      <button className="btn btn-primary">Create Room</button>
+    <div className='relative'>
+      
     </div>
-  );
+  )
 }
+
+export default page
