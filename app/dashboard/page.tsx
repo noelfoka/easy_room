@@ -1,21 +1,24 @@
 "use client";
 
-import React from 'react'
-import { useKindeBrowserClient } from '@kinde-oss/kinde-auth-nextjs'
-import { LogoutLink } from '@kinde-oss/kinde-auth-nextjs';
+import React from "react";
+import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
+import { LogoutLink } from "@kinde-oss/kinde-auth-nextjs";
+import Wrapper from "../components/Wrapper";
 
 const page = () => {
-
   // eslint-disable-next-line react-hooks/rules-of-hooks
-  const {user} = useKindeBrowserClient()
+  const { user } = useKindeBrowserClient();
 
   return (
-    <div>
+    <Wrapper>
+      <div>
+        <div>
+          Bienvenue {user?.given_name} {user?.family_name} à mon dashboard
+        </div>
+        <LogoutLink className="btn btn-error">Se déconnecter</LogoutLink>
+      </div>
+    </Wrapper>
+  );
+};
 
-      <div>Bienvenue {user?.given_name} {user?.family_name} à mon dashboard</div>
-      <LogoutLink className="btn btn-error">Se déconnecter</LogoutLink>
-    </div>
-  )
-}
-
-export default page
+export default page;

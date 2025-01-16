@@ -9,6 +9,7 @@ const Wrapper = ({children}: WrapperProps) => {
   return (
     <div>
       <Navbar />
+      <div>{children}</div>
     </div>
   )
 }
