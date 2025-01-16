@@ -34,7 +34,20 @@ export async function POST(request: Request) {
         }
       });
 
-    } else {}
+    } else {
+      // Si l'utilisateur existe déjà, Vérifier si les informations sont à jour
+      if (user.familyName == null || user.givenName == null) {
+
+        // Mettre à jour les informations de l'utilisateur
+        user = await prisma.user.update({
+          where: {email},
+          data: {
+            familyName: user.familyName ?? familyName,
+            givenName: user.givenName ?? givenName
+          }
+        });
+      }
+    }
 
   } catch (error) {
     console.error('Erreur api users', error);
