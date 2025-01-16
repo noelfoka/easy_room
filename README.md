@@ -21,4 +21,6 @@ Une application web pour créer et gérer des salles de réunion.
 
 ### Installation
 
-1.
+1. Prisma ```npm install prisma --save-dev```
+2. DaisyUI ```npm i -D daisyui@latest```
+3. 
