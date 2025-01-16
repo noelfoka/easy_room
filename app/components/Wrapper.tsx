@@ -4,7 +4,7 @@ type WrapperProps = {
   children: React.ReactNode
 }
 
-const Wrapper = () => {
+const Wrapper = ({children}: WrapperProps) => {
   return (
     <div>Wrapper</div>
   )
