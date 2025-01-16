@@ -49,7 +49,15 @@ export async function POST(request: Request) {
       }
     }
 
-    return NextResponse.json({ message: "Utilisateur enregistré avec succès" }, { status: 201 })
+
+    // Vérifier si l'utilisateur est associé à une entreprise
+    const company = await prisma.company.findFirst({
+      where: {employees: {
+        some: {
+          id: user.id
+        }
+      }}
+    })
 
   } catch (error) {
     console.error('Erreur api users', error);
