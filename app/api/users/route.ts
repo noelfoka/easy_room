@@ -49,6 +49,8 @@ export async function POST(request: Request) {
       }
     }
 
+    return NextResponse.json({ message: "Utilisateur enregistré avec succès" }, { status: 201 })
+
   } catch (error) {
     console.error('Erreur api users', error);
     return NextResponse.json(
