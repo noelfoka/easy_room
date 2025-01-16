@@ -17,6 +17,11 @@ export async function POST(request: Request) {
       )
     }
 
+    // Vérifier si l'utilisateur existe déjà dans la base de données
+    const user = await prisma.user.findUnique({
+      where: {email}
+    });
+
   } catch (error) {
     console.error('Erreur api users', error);
     return NextResponse.json(
