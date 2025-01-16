@@ -16,6 +16,9 @@ Une application web pour créer et gérer des salles de réunion.
 #### Authentication
 - Kinde
 
+#### Database
+- Edgestore pour stocker nos images
+
 ### Installation
 
 1.
