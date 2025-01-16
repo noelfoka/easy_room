@@ -12,6 +12,7 @@ Une application web pour créer et gérer des salles de réunion.
 - React
 - Tailwind CSS
 - DaisyUI
+- Lucide react
 
 #### Authentication
 - Kinde
