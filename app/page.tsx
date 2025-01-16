@@ -1,6 +1,7 @@
 import { CalendarCheck } from "lucide-react";
 import Image from "next/image";
 import React from "react";
+import {RegisterLink, LoginLink} from "@kinde-oss/kinde-auth-nextjs/components";
 
 const page = () => {
   return (
@@ -42,11 +43,11 @@ const page = () => {
             </ul>
 
             <div className="mt-6 flex justify-center">
-              <button className="btn btn-secondary"> Se connecter</button>
-              <button className="btn btn-secondary btn-outline ml-4">
+              <LoginLink className="btn btn-secondary"> Se connecter</LoginLink>
+              <RegisterLink className="btn btn-secondary btn-outline ml-4">
                 {" "}
                 S&apos;inscrire
-              </button>
+              </RegisterLink>
             </div>
           </div>
         </div>
