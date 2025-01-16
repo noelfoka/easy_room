@@ -26,6 +26,10 @@ const page = () => {
               <li className="step step-secondary text-sm"><div className="badge">Réservez vos salles</div></li>
               <li className="step step-secondary text-sm"><div className="badge">Créer vos réservations</div></li>
             </ul>
+
+            <div>
+              <button className="btn btn-secondary"> Se connecter</button>
+            </div>
           </div>
         </div>
       </section>
