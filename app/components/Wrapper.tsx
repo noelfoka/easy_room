@@ -1,7 +1,5 @@
 import React from 'react'
 import Navbar from './Navbar'
-import { useKindeBrowserClient } from '@kinde-oss/kinde-auth-nextjs'
-import { usePathname } from 'next/navigation'
 
 type WrapperProps = {
   children: React.ReactNode
@@ -9,8 +7,7 @@ type WrapperProps = {
 
 const Wrapper = ({children}: WrapperProps) => {
 
-  const {user} = useKindeBrowserClient();
-  const pathname = usePathname();
+  
 
   return (
     <div>
