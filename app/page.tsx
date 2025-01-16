@@ -1,3 +1,4 @@
+import { CalendarCheck } from 'lucide-react'
 import React from 'react'
 
 const page = () => {
@@ -10,6 +11,9 @@ const page = () => {
 
           <div className="max-w-lg">
             <h1>
+              <div className='bg-secondary p-1 mr-1 rounded-md text-white'>
+              <CalendarCheck className='w-8 h-8 md:w-16 md:h-16' />
+              </div>
               <span>Easy<span className="text-primary">Room</span></span>
             </h1>
           </div>
