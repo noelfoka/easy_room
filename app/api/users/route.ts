@@ -18,13 +18,22 @@ export async function POST(request: Request) {
     }
 
     // Vérifier si l'utilisateur existe déjà dans la base de données
-    const user = await prisma.user.findUnique({
+    let user = await prisma.user.findUnique({
       where: {email}
     });
 
     // si l'utilisateur n'existe pas
     if (!user) {
-      
+
+      // Créer un nouvel utilisateur
+      user = await prisma.user.create({
+        data: {
+          email,
+          familyName,
+          givenName
+        }
+      })
+
     } else {}
 
   } catch (error) {
