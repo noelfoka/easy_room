@@ -66,6 +66,10 @@ const page = () => {
           </div>
         </div>
       </section>
+
+      <footer className="text-center items-center bg-base-200 text-base-content mt-20 py-5 px-10">
+        <h1>EasyRoom &copy; 2025 - Made with ❤️ by Noel Foka</h1>
+      </footer>
     </div>
   );
 };
