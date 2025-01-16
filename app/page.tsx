@@ -17,14 +17,14 @@ const page = () => {
             </h1>
 
             <h2 className="py-4 md:py-6 text-xl md:text-3xl font-semibold">
-              Gérez la réservation de vos <span>salles de réunion</span> en
+              Gérez la réservation de vos <span className="text-secondary">salles de réunion</span> en
               toute simplicité
             </h2>
 
             <ul className="steps steps-vertical lg:steps-horizontal">
               <li className="step step-secondary text-sm"><div className="badge">Créer un compte</div></li>
-              <li className="step step-secondary text-sm"><div className="badge">Créer un compte</div></li>
-              <li className="step step-secondary text-sm"><div className="badge">Créer un compte</div></li>
+              <li className="step step-secondary text-sm"><div className="badge">Réservez vos salles</div></li>
+              <li className="step step-secondary text-sm"><div className="badge">Créer vos réservations</div></li>
             </ul>
           </div>
         </div>
