@@ -57,7 +57,13 @@ export async function POST(request: Request) {
           id: user.id
         }
       }}
-    })
+    });
+
+    if (company) {
+      return NextResponse.json({companyId: company.id});
+    } else {
+      return NextResponse.json({message: "Aucune entreprise trouvée pour cet utilisateur"});
+    }
 
   } catch (error) {
     console.error('Erreur api users', error);
