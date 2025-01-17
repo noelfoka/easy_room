@@ -34,6 +34,9 @@ const page = () => {
       // Si la reponse n'est pas bonne
       if (!response.ok) {
         const {message} = await response.json();
+        alert(message);
+        return;
+      }
       }
     } catch (error) {
       console.error(error);
