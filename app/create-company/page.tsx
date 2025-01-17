@@ -10,12 +10,18 @@ const page = () => {
   const { user } = useKindeBrowserClient();
   const [companyName, setCompanyName] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(true);
+  const [notification, setNotification] = useState<string>("");
+
+  const closeNotification = () => {
+    setNotification("");
+  }
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     // Vérifier si le companyName existe
     if (!companyName) {
+      setNotification("Le nom de l'entreprise est obligatoire");
       return;
     }
 
