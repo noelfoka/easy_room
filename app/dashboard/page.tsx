@@ -1,11 +1,10 @@
-"use client";
+"use client"
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
 import Wrapper from "../components/Wrapper";
 
 const page = () => {
-  // eslint-disable-next-line react-hooks/rules-of-hooks
   const { user } = useKindeBrowserClient();
   const [companyId, setCompanyId] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
@@ -39,6 +38,14 @@ const page = () => {
     }
    }
   }
+
+  // Appel de la fonction fetchCompanyId au chargement de la page
+  useEffect(() => {
+    const initializeData = async () => {
+      await fetchCompanyId();
+    }
+    initializeData();
+  }, [user]);
 
   return (
     <Wrapper>
