@@ -34,6 +34,14 @@ export async function POST(request: Request) {
       where: {name: companyName}
     });
 
+    // Vérifier si la company existe déjà dans la base de données
+    if (existingCompany) {
+      return NextResponse.json(
+        { message: "Une entreprise avec ce nom existe déjà" },
+        { status: 409 }
+      )
+    }
+
   } catch (error) {
     console.error('Erreur api companies', error);
     return NextResponse.json(
