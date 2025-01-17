@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
 import { usePathname } from "next/navigation";
-import { CalendarCheck } from "lucide-react";
+import { CalendarCheck, Menu, X } from "lucide-react";
 import Link from "next/link";
 import { LogoutLink } from "@kinde-oss/kinde-auth-nextjs";
 
@@ -76,7 +76,9 @@ const Navbar = () => {
 
           {/* Mobile menu */}
           <div className="md:hidden">
-            <button className="btn btn-ghost mb-2"></button>
+            <button className="btn btn-ghost mb-2" onClick={toggleMenu}>
+              {isMenuOpen ? <X /> : <Menu/>}
+            </button>
           </div>
         </div>
       </nav>
