@@ -21,6 +21,14 @@ export async function POST(request: Request) {
       where: {email}
     });
 
+    // si l'utilisateur n'existe pas
+    if(!user) {
+      return NextResponse.json(
+        { message: "L'utilisateur n'existe pas" },
+        { status: 404 }
+      )
+    }
+
   } catch (error) {
     console.error('Erreur api companies', error);
     return NextResponse.json(
