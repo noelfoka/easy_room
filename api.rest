@@ -6,3 +6,12 @@ Content-Type: application/json
   "familyName": "Foka",
   "givenName": "Noel"
 }
+
+###
+POST http://localhost:3000/api/companies
+Content-Type: application/json
+
+{
+  "email": "nomgnenoel@gmail.com",
+  "companyName": "Google"
+}
