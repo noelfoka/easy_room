@@ -14,7 +14,17 @@ const page = () => {
    // Vérifier si il y a un user connecté
    if (user) {
     try {
-      
+      const response = await fetch('/api/users', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email: user.email,
+          familyName: user.family_name,
+          givenName: user.given_name
+        })
+      });
     } catch (error) {
       console.error(error);
       setCompanyId(null);
