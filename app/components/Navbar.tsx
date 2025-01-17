@@ -56,20 +56,21 @@ const Navbar = () => {
           {/* Desktop menu */}
           <div className="hidden md:flex items-center space-x-6">
             <Link
+              href="/create-company"
+              className={`link link-hover font-bold ${
+                isActive("/create-company") ? "text-secondary" : ""
+              }`}
+            >
+              Vos entreprises
+            </Link>
+
+            <Link
               href="/dashboard"
               className={`link link-hover font-bold ${
                 isActive("/dashboard") ? "text-secondary" : ""
               }`}
             >
               Réserver
-            </Link>
-            <Link
-              href="/create-company"
-              className={`link link-hover font-bold ${
-                isActive("/create-company") ? "text-secondary" : ""
-              }`}
-            >
-              Creer une entreprise
             </Link>
           </div>
           <LogoutLink className="btn btn-secondary btn-sm hidden md:flex">
@@ -89,6 +90,15 @@ const Navbar = () => {
       {isMenuOpen && (
         <div className="md:hidden shadow-lg p-4 rounded-lg space-y-4 flex flex-col mt-3">
           <Link
+            href="/create-company"
+            className={`link link-hover font-bold ${
+              isActive("/create-company") ? "text-secondary" : ""
+            }`}
+          >
+            Vos entreprises
+          </Link>
+
+          <Link
             href="/dashboard"
             className={`link link-hover font-bold ${
               isActive("/dashboard") ? "text-secondary" : ""
@@ -96,14 +106,7 @@ const Navbar = () => {
           >
             Réserver
           </Link>
-          <Link
-            href="/create-company"
-            className={`link link-hover font-bold ${
-              isActive("/create-company") ? "text-secondary" : ""
-            }`}
-          >
-            Creer une entreprise
-          </Link>
+
           <LogoutLink className="btn btn-secondary btn-sm">
             Déconnexion
           </LogoutLink>
