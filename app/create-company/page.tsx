@@ -13,6 +13,17 @@ const page = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    // Vérifier si le companyName existe
+    if (!companyName) {
+      return;
+    }
+
+    try {
+      
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
