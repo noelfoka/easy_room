@@ -19,7 +19,7 @@ const page = () => {
     <Wrapper>
       <div>
         <h1 className="text-2xl mb-4">Créer une entreprise</h1>
-        <form>
+        <form onSubmit={handleSubmit}>
           <div className="flex flex-row">
             <input
               type="text"
