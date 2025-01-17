@@ -12,6 +12,7 @@ const Navbar = () => {
   const pathname = usePathname();
 
   const [loading, setLoading] = useState<boolean>(true);
+  const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
 
   useEffect(() => {
     if (user) {
@@ -22,6 +23,10 @@ const Navbar = () => {
   }, [user]);
 
   const isActive = (link: string) => pathname === link;
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  }
 
   return (
     <div className="fixed top-0 w-full bg-white backdrop-blur-sm">
@@ -70,7 +75,9 @@ const Navbar = () => {
           <LogoutLink className="btn btn-secondary btn-sm hidden md:flex">Déconnexion</LogoutLink>
 
           {/* Mobile menu */}
-          <div></div>
+          <div className="md:hidden">
+            <button className="btn btn-ghost mb-2"></button>
+          </div>
         </div>
       </nav>
     </div>
