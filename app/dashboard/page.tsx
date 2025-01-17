@@ -31,6 +31,7 @@ const page = () => {
 
       // Mettre à jour le companyId
       setCompanyId(data.companyId || null);
+      setLoading(false);
 
     } catch (error) {
       console.error(error);
