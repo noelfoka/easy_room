@@ -25,6 +25,10 @@ const page = () => {
           givenName: user.given_name
         })
       });
+
+      // Récupérer les données de l'utilisateur
+      const data = await response.json();
+
     } catch (error) {
       console.error(error);
       setCompanyId(null);
