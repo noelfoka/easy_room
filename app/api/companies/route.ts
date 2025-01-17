@@ -1,9 +1,7 @@
-// Api de création de companies
-
 import { NextResponse } from "next/server";
 import prisma from "@/prisma/lib/prisma";
 
-
+// Api de création de companies
 export async function POST(request: Request) {
   try {
     // extraction des données de la requête
@@ -60,6 +58,19 @@ export async function POST(request: Request) {
       { message: "La company a été créée avec succès", company: newCompany },
       { status: 201 }
     );
+  } catch (error) {
+    console.error("Erreur api companies", error);
+    return NextResponse.json(
+      { message: "Une erreur est survenue lors de la création de la company" },
+      { status: 500 }
+    );
+  }
+}
+
+// Api pour recuperer les informations d'une entreprise
+export async function GET(request: Request) {
+  try {
+    
   } catch (error) {
     console.error("Erreur api companies", error);
     return NextResponse.json(
