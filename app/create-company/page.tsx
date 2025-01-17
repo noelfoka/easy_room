@@ -1,7 +1,12 @@
 import React from "react";
 import Wrapper from "../components/Wrapper";
+import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
 
 const page = () => {
+
+  // Récupération de l'utilisateur
+  const { user } = useKindeBrowserClient();
+
   return (
     <Wrapper>
       <div>
