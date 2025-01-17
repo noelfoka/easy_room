@@ -47,6 +47,16 @@ const page = () => {
     initializeData();
   }, [user]);
 
+  if (loading) {
+    return (
+      <Wrapper>
+        <div className="w-full flex justify-center">
+        <span className="loading loading-spinner loading-lg"></span>
+        </div>
+      </Wrapper>
+    )
+  }
+
   return (
     <Wrapper>
       <div>
