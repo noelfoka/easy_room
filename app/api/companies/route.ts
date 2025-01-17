@@ -29,6 +29,11 @@ export async function POST(request: Request) {
       )
     }
 
+    // Vérifier si la company existe déjà dans la base de données
+    const existingCompany = await prisma.company.findUnique({
+      where: {name: companyName}
+    });
+
   } catch (error) {
     console.error('Erreur api companies', error);
     return NextResponse.json(
