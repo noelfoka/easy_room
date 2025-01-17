@@ -20,7 +20,16 @@ const page = () => {
     }
 
     try {
-      
+      const response = await fetch("/api/companies", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: user?.email,
+          companyName: companyName
+        })
+      })
     } catch (error) {
       console.error(error);
     }
