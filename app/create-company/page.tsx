@@ -30,6 +30,11 @@ const page = () => {
           companyName: companyName
         })
       })
+
+      // Si la reponse n'est pas bonne
+      if (!response.ok) {
+        const {message} = await response.json();
+      }
     } catch (error) {
       console.error(error);
     }
