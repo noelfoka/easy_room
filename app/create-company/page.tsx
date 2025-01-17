@@ -20,6 +20,8 @@ const page = () => {
             <input
               type="text"
               name="companyName"
+              value={companyName}
+              onChange={(e) => setCompanyName(e.target.value)}
               id="companyName"
               placeholder="Nom de l'entreprise"
               required
