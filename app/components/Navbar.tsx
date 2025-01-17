@@ -26,7 +26,7 @@ const Navbar = () => {
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
-  }
+  };
 
   return (
     <div className="fixed top-0 w-full bg-white backdrop-blur-sm">
@@ -72,16 +72,43 @@ const Navbar = () => {
               Test
             </Link>
           </div>
-          <LogoutLink className="btn btn-secondary btn-sm hidden md:flex">Déconnexion</LogoutLink>
+          <LogoutLink className="btn btn-secondary btn-sm hidden md:flex">
+            Déconnexion
+          </LogoutLink>
 
           {/* Mobile menu */}
           <div className="md:hidden">
             <button className="btn btn-ghost mb-2" onClick={toggleMenu}>
-              {isMenuOpen ? <X /> : <Menu/>}
+              {isMenuOpen ? <X /> : <Menu />}
             </button>
           </div>
         </div>
       </nav>
+
+      {/* Mobile menu popup */}
+      {isMenuOpen && (
+        <div className="md:hidden shadow-lg p-4 rounded-lg space-y-4 flex flex-col mt-3">
+          <Link
+            href="/dashboard"
+            className={`link link-hover font-bold ${
+              isActive("/dashboard") ? "text-secondary" : ""
+            }`}
+          >
+            Réserver
+          </Link>
+          <Link
+            href="/test"
+            className={`link link-hover font-bold ${
+              isActive("/test") ? "text-secondary" : ""
+            }`}
+          >
+            Test
+          </Link>
+          <LogoutLink className="btn btn-secondary btn-sm">
+            Déconnexion
+          </LogoutLink>
+        </div>
+      )}
     </div>
   );
 };
