@@ -11,6 +11,10 @@ const page = () => {
   const [companyName, setCompanyName] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(true);
 
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+  };
+
   return (
     <Wrapper>
       <div>
