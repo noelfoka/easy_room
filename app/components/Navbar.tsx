@@ -1,7 +1,10 @@
+"use client";
+
 import React, { useEffect, useState } from 'react'
 import { useKindeBrowserClient } from '@kinde-oss/kinde-auth-nextjs'
 import { usePathname } from 'next/navigation'
 import { CalendarCheck } from 'lucide-react';
+import Link from 'next/link';
 
 const Navbar = () => {
 
@@ -39,6 +42,11 @@ const Navbar = () => {
                 <div className="badge badge-ghost">{user?.email}</div>
               </div>
             )}
+          </div>
+
+          {/* Desktop */} 
+          <div className='hidden md:flex items-center space-x-6'>
+            <Link href="/dashboard">Réserver</Link>
           </div>
         </div>
       </nav>
