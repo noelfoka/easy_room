@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import Wrapper from "../components/Wrapper";
 import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
+import Notification from "../components/Notification";
 
 const page = () => {
 
@@ -40,16 +41,22 @@ const page = () => {
       // Si la reponse n'est pas bonne
       if (!response.ok) {
         const {message} = await response.json();
-        alert(message);
+        setNotification(message);
         return;
       }
+
+      setNotification("L'entreprise a été créée avec succès");
+      setCompanyName("");
+
     } catch (error) {
       console.error(error);
+      setNotification("Une erreur est survenue lors de la création de l'entreprise");
     }
   };
 
   return (
     <Wrapper>
+      {notification && (<Notification message={notification} onClose={closeNotification}></Notification>)}
       <div>
         <h1 className="text-2xl mb-4">Créer une entreprise</h1>
         <form onSubmit={handleSubmit}>

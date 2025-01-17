@@ -17,7 +17,7 @@ const Notification: React.FC<NotificationProps> = ({ message, onClose }) => {
   }, [onClose]);
 
   return (
-    <div className="toast toasr-top-left">
+    <div className="toast toast-top">
       <div className="alert p-2 text-sm shadow-lg border boeder-secondary rounded-md">
         <span className="flex items-center">
           <Info className="w-4 mr-2 font-bold text-secondary" />
