@@ -43,7 +43,6 @@ const page = () => {
         alert(message);
         return;
       }
-      }
     } catch (error) {
       console.error(error);
     }
