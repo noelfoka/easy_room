@@ -10,7 +10,17 @@ const page = () => {
   const [companyId, setCompanyId] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
 
-  const fetchCompanyId = async () => {}
+  const fetchCompanyId = async () => {
+   // Vérifier si il y a un user connecté
+   if (user) {
+    try {
+      
+    } catch (error) {
+      console.error(error);
+      setCompanyId(null);
+    }
+   }
+  }
 
   return (
     <Wrapper>
