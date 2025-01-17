@@ -1,4 +1,6 @@
-import React from "react";
+"use client";
+
+import React, { useState } from "react";
 import Wrapper from "../components/Wrapper";
 import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
 
@@ -6,6 +8,8 @@ const page = () => {
 
   // Récupération de l'utilisateur
   const { user } = useKindeBrowserClient();
+  const [companyName, setCompanyName] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(true);
 
   return (
     <Wrapper>
