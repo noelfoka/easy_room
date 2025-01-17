@@ -64,12 +64,12 @@ const Navbar = () => {
               Réserver
             </Link>
             <Link
-              href="/test"
+              href="/create-company"
               className={`link link-hover font-bold ${
-                isActive("/test") ? "text-secondary" : ""
+                isActive("/create-company") ? "text-secondary" : ""
               }`}
             >
-              Test
+              Creer une entreprise
             </Link>
           </div>
           <LogoutLink className="btn btn-secondary btn-sm hidden md:flex">
@@ -97,12 +97,12 @@ const Navbar = () => {
             Réserver
           </Link>
           <Link
-            href="/test"
+            href="/create-company"
             className={`link link-hover font-bold ${
-              isActive("/test") ? "text-secondary" : ""
+              isActive("/create-company") ? "text-secondary" : ""
             }`}
           >
-            Test
+            Creer une entreprise
           </Link>
           <LogoutLink className="btn btn-secondary btn-sm">
             Déconnexion
