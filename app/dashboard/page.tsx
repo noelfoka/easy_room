@@ -29,6 +29,9 @@ const page = () => {
       // Récupérer les données de l'utilisateur
       const data = await response.json();
 
+      // Mettre à jour le companyId
+      setCompanyId(data.companyId || null);
+
     } catch (error) {
       console.error(error);
       setCompanyId(null);
