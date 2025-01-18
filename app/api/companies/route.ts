@@ -93,6 +93,12 @@ export async function GET(request: Request) {
         { status: 404 }
       );
     }
+
+    // Récupérer la liste des entreprises de l'utilisateur
+    const companies = await prisma.company.findMany({
+      where: {createdById: user.id}
+    });
+
   } catch (error) {
     console.error("Erreur api companies", error);
     return NextResponse.json(
