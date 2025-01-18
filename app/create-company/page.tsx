@@ -61,6 +61,13 @@ const page = () => {
         const response = await fetch(`/api/companies?email=${user.email}`, {
           method: "GET"
         });
+
+        // Si la reponse n'est pas bonne
+        if (!response.ok) {
+          const {message} = await response.json();
+          setNotification(message);
+          return;
+        }
       }
     } catch (error) {
       console.error(error);
