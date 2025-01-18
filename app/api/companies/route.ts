@@ -70,6 +70,9 @@ export async function POST(request: Request) {
 // Api pour recuperer les informations d'une entreprise
 export async function GET(request: Request) {
   try {
+
+    const { searchParams } = new URL(request.url);
+    const email = searchParams.get("email");
     
   } catch (error) {
     console.error("Erreur api companies", error);
