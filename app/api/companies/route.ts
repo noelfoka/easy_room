@@ -99,6 +99,8 @@ export async function GET(request: Request) {
       where: {createdById: user.id}
     });
 
+    return NextResponse.json({companies},  { status: 200 });
+
   } catch (error) {
     console.error("Erreur api companies", error);
     return NextResponse.json(
