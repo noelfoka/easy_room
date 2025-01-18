@@ -11,8 +11,9 @@ const page = () => {
   const { user } = useKindeBrowserClient();
   const [companyName, setCompanyName] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(true);
-  const [notification, setNotification] = useState<string>("");
+  const [companies, setCompanies] = useState<>(null);
 
+  const [notification, setNotification] = useState<string>("");
   const closeNotification = () => {
     setNotification("");
   }
@@ -65,9 +66,10 @@ const page = () => {
         // Si la reponse n'est pas bonne
         if (!response.ok) {
           const {message} = await response.json();
-          setNotification(message);
-          return;
+          throw new Error(message);
         }
+        const data = await response.json();
+
       }
     } catch (error) {
       console.error(error);
