@@ -80,7 +80,12 @@ export async function GET(request: Request) {
         { status: 400 }
       );
     }
-    
+
+    // Vérifier si l'utilisateur existe avec cet email
+    const user = await prisma.user.findUnique({
+      where: {email}
+    })
+
   } catch (error) {
     console.error("Erreur api companies", error);
     return NextResponse.json(
