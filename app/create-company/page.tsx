@@ -54,6 +54,16 @@ const page = () => {
     }
   };
 
+  // Fonction permettant de récupérer la liste des entreprises
+  const fechCompanies = async () => {
+    try {
+      
+    } catch (error) {
+      console.error(error);
+      setNotification("Une erreur est survenue lors de la récupération des entreprises");
+    }
+  }
+
   return (
     <Wrapper>
       {notification && (<Notification message={notification} onClose={closeNotification}></Notification>)}
