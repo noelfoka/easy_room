@@ -17,4 +17,4 @@ Content-Type: application/json
 }
 
 ###
-GET http://localhost:3000/api/companies?email=noel2@foka.fr
+GET http://localhost:3000/api/companies?email=nomgnenoel@gmail.com
