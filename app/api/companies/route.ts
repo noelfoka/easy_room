@@ -83,9 +83,16 @@ export async function GET(request: Request) {
 
     // Vérifier si l'utilisateur existe avec cet email
     const user = await prisma.user.findUnique({
-      where: {email}
-    })
+      where: { email },
+    });
 
+    // si l'utilisateur n'existe pas
+    if (!user) {
+      return NextResponse.json(
+        { message: "L'utilisateur n'existe pas" },
+        { status: 404 }
+      );
+    }
   } catch (error) {
     console.error("Erreur api companies", error);
     return NextResponse.json(
