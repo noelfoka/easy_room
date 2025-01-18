@@ -57,7 +57,11 @@ const page = () => {
   // Fonction permettant de récupérer la liste des entreprises
   const fechCompanies = async () => {
     try {
-      
+      if(user?.email) {
+        const response = await fetch(`/api/companies?email=${user.email}`, {
+          method: "GET"
+        });
+      }
     } catch (error) {
       console.error(error);
       setNotification("Une erreur est survenue lors de la récupération des entreprises");
