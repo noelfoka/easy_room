@@ -131,12 +131,13 @@ const page = () => {
         ) : companies && companies.length > 0 ? (
           <ul className="list-decimal divide-base-200 divide-y">
             {companies.map((company) => (
-              <li key={company.id}>
+              <li key={company.id} className="py-4 flex flex-col md:flex-row">
                 <div className="badge badge-secondary badge-outline mb-2 md:mb-0">
                   {company.name}
                 </div>
                 <div className="flex items-center">
                   <Link href={`employees/${company.id}`} className="btn btn-sm btn-outline btn-secondary mr-2">Ajouter des employés</Link>
+                  <Link href={`rooms/${company.id}`} className="btn btn-sm btn-outline btn-secondary mr-2">Ajouter des salles</Link>
                 </div>
               </li>
             ))}
