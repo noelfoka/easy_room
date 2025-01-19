@@ -1,6 +1,7 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 "use client"
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Wrapper from "../components/Wrapper";
 import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
 import Notification from "../components/Notification";
@@ -61,7 +62,7 @@ const page = () => {
   };
 
   // Fonction permettant de récupérer la liste des entreprises
-  const fechCompanies = async () => {
+  const fetchCompanies = async () => {
     try {
       if(user?.email) {
         const response = await fetch(`/api/companies?email=${user.email}`, {
@@ -83,6 +84,14 @@ const page = () => {
       setNotification("Une erreur est survenue lors de la récupération des entreprises");
     }
   }
+
+  // Appel de la fonction fetchCompanies au chargement de la page
+  useEffect(() => {
+    
+      fetchCompanies();
+      setLoading(false);
+    
+  }, [user]);
 
   return (
     <Wrapper>
@@ -109,10 +118,22 @@ const page = () => {
         <h1 className="text-2xl mb-4 font-bold">Mes entreprises</h1>
 
         {loading ? (
-          <div>
+          <div className="text-center mt-32">
             <span className="loading loading-spinner loading-lg"></span>
           </div>
-        ) : ()}
+        ) : companies && companies.length > 0 ? (
+          <ul className="list-decimal divide-base-200 divide-y">
+
+            {companies.map((company) => (
+              <li key={company.id}>
+                {company.name}
+              </li>
+            ))}
+
+          </ul>
+        ) : (
+          <p>Aucune entreprise trouvée</p>
+        )}
 
       </div>
     </Wrapper>
