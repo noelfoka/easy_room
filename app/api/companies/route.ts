@@ -142,6 +142,11 @@ export async function DELETE(request: Request) {
       where: {id}
     });
 
+    return NextResponse.json(
+      { message: "L'entreprise a été supprimée avec succès" },
+      { status: 200 }
+    );
+
   } catch (error) {
     console.error("Erreur api companies", error);
     return NextResponse.json(
