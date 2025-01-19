@@ -6,6 +6,7 @@ import Wrapper from "../components/Wrapper";
 import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
 import Notification from "../components/Notification";
 import Link from "next/link";
+import { Trash2 } from "lucide-react";
 
 export interface Company {
   id: string;
@@ -138,6 +139,9 @@ const page = () => {
                 <div className="flex items-center">
                   <Link href={`employees/${company.id}`} className="btn btn-sm btn-outline btn-secondary mr-2">Ajouter des employés</Link>
                   <Link href={`rooms/${company.id}`} className="btn btn-sm btn-outline btn-secondary mr-2">Ajouter des salles</Link>
+                  <button className="btn btn-sm">
+                    <Trash2 />
+                  </button>
                 </div>
               </li>
             ))}
