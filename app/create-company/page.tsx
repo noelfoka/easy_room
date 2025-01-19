@@ -108,6 +108,12 @@ const page = () => {
 
         <h1 className="text-2xl mb-4 font-bold">Mes entreprises</h1>
 
+        {loading ? (
+          <div>
+            <span className="loading loading-spinner loading-lg"></span>
+          </div>
+        ) : ()}
+
       </div>
     </Wrapper>
   );
