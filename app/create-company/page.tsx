@@ -140,7 +140,7 @@ const page = () => {
                   <Link href={`employees/${company.id}`} className="btn btn-sm btn-outline btn-secondary mr-2">Ajouter des employés</Link>
                   <Link href={`rooms/${company.id}`} className="btn btn-sm btn-outline btn-secondary mr-2">Ajouter des salles</Link>
                   <button className="btn btn-sm">
-                    <Trash2 />
+                    <Trash2 className="w-4" />
                   </button>
                 </div>
               </li>

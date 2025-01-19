@@ -109,3 +109,16 @@ export async function GET(request: Request) {
     );
   }
 }
+
+// Api de suppression d'une entreprise
+export async function DELETE(request: Request) {
+  try {
+    
+  } catch (error) {
+    console.error("Erreur api companies", error);
+    return NextResponse.json(
+      { message: "Une erreur est survenue lors de la suppression de la company" },
+      { status: 500 }
+    );
+  }
+}
