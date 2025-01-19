@@ -95,13 +95,8 @@ const page = () => {
   }, [user]);
 
   const handleDelete = async (companyId: string) => {
-    try {
-      
-    } catch (error) {
-      console.error(error);
-      setNotification(
-        "Une erreur est survenue lors de la suppression de l'entreprise"
-      );
+    if (confirm("Êtes-vous sûr de vouloir supprimer cette entreprise ?")) {
+
     }
   }
 
@@ -150,7 +145,7 @@ const page = () => {
                 <div className="flex items-center">
                   <Link href={`employees/${company.id}`} className="btn btn-sm btn-outline btn-secondary mr-2">Ajouter des employés</Link>
                   <Link href={`rooms/${company.id}`} className="btn btn-sm btn-outline btn-secondary mr-2">Ajouter des salles</Link>
-                  <button className="btn btn-sm">
+                  <button className="btn btn-sm" onClick={() => handleDelete(company.id)}>
                     <Trash2 className="w-4" />
                   </button>
                 </div>
