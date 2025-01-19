@@ -121,6 +121,14 @@ export async function DELETE(request: Request) {
       where: {id}
     })
 
+    // Vérifier si on a cette entreprise
+    if (!company) {
+      return NextResponse.json(
+        { message: "L'entreprise n'existe pas" },
+        { status: 404 }
+      );
+    }
+
   } catch (error) {
     console.error("Erreur api companies", error);
     return NextResponse.json(
