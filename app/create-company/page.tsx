@@ -98,6 +98,24 @@ const page = () => {
     if (confirm("Êtes-vous sûr de vouloir supprimer cette entreprise ?")) {
 
       try {
+
+        const response = await fetch(`/api/companies`, {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            id: companyId
+          }),
+        });
+
+        // Si la reponse n'est pas bonne
+        if (!response.ok) {
+          const { message } = await response.json();
+          throw new Error(message);
+        }
+        setNotification("L'entreprise a été supprimée avec succès");
+        fetchCompanies();
         
       } catch (error) {
         console.error(error);
