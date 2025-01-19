@@ -97,6 +97,15 @@ const page = () => {
   const handleDelete = async (companyId: string) => {
     if (confirm("Êtes-vous sûr de vouloir supprimer cette entreprise ?")) {
 
+      try {
+        
+      } catch (error) {
+        console.error(error);
+        setNotification(
+          "Une erreur est survenue lors de la suppression de l'entreprise"
+        );
+      }
+
     }
   }
 
