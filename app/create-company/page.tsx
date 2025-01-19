@@ -75,6 +75,7 @@ const page = () => {
         }
         const data = await response.json();
         setCompanies(data.companies);
+        setLoading(false);
 
       }
     } catch (error) {
@@ -104,6 +105,9 @@ const page = () => {
             <button type="submit" className="btn btn-secondary ml-2">Creer l&apos;entreprise</button>
           </div>
         </form>
+
+        <h1 className="text-2xl mb-4 font-bold">Mes entreprises</h1>
+
       </div>
     </Wrapper>
   );
