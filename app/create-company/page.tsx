@@ -5,13 +5,18 @@ import Wrapper from "../components/Wrapper";
 import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
 import Notification from "../components/Notification";
 
+export interface Company {
+  id: string;
+  name: string;
+}
+
 const page = () => {
 
   // Récupération de l'utilisateur
   const { user } = useKindeBrowserClient();
   const [companyName, setCompanyName] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(true);
-  const [companies, setCompanies] = useState<>(null);
+  const [companies, setCompanies] = useState<Company[] | null>(null);
 
   const [notification, setNotification] = useState<string>("");
   const closeNotification = () => {
@@ -69,6 +74,7 @@ const page = () => {
           throw new Error(message);
         }
         const data = await response.json();
+        setCompanies(data.companies);
 
       }
     } catch (error) {
