@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-"use client"
+"use client";
 
 import React, { useEffect, useState } from "react";
 import Wrapper from "../components/Wrapper";
@@ -12,7 +12,6 @@ export interface Company {
 }
 
 const page = () => {
-
   // Récupération de l'utilisateur
   const { user } = useKindeBrowserClient();
   const [companyName, setCompanyName] = useState<string>("");
@@ -22,7 +21,7 @@ const page = () => {
   const [notification, setNotification] = useState<string>("");
   const closeNotification = () => {
     setNotification("");
-  }
+  };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -41,61 +40,66 @@ const page = () => {
         },
         body: JSON.stringify({
           email: user?.email,
-          companyName: companyName
-        })
-      })
+          companyName: companyName,
+        }),
+      });
 
       // Si la reponse n'est pas bonne
       if (!response.ok) {
-        const {message} = await response.json();
+        const { message } = await response.json();
         setNotification(message);
         return;
       }
 
       setNotification("L'entreprise a été créée avec succès");
       setCompanyName("");
-
     } catch (error) {
       console.error(error);
-      setNotification("Une erreur est survenue lors de la création de l'entreprise");
+      setNotification(
+        "Une erreur est survenue lors de la création de l'entreprise"
+      );
     }
   };
 
   // Fonction permettant de récupérer la liste des entreprises
   const fetchCompanies = async () => {
     try {
-      if(user?.email) {
+      if (user?.email) {
         const response = await fetch(`/api/companies?email=${user.email}`, {
-          method: "GET"
+          method: "GET",
         });
 
         // Si la reponse n'est pas bonne
         if (!response.ok) {
-          const {message} = await response.json();
+          const { message } = await response.json();
           throw new Error(message);
         }
         const data = await response.json();
         setCompanies(data.companies);
         setLoading(false);
-
       }
     } catch (error) {
       console.error(error);
-      setNotification("Une erreur est survenue lors de la récupération des entreprises");
+      setNotification(
+        "Une erreur est survenue lors de la récupération des entreprises"
+      );
     }
-  }
+  };
 
   // Appel de la fonction fetchCompanies au chargement de la page
   useEffect(() => {
-    
-      fetchCompanies();
-      setLoading(false);
-    
+    fetchCompanies();
+    setLoading(false);
   }, [user]);
 
   return (
     <Wrapper>
-      {notification && (<Notification message={notification} onClose={closeNotification}></Notification>)}
+      {notification && (
+        <Notification
+          message={notification}
+          onClose={closeNotification}
+        ></Notification>
+      )}
       <div>
         <h1 className="text-2xl mb-4">Créer une entreprise</h1>
         <form onSubmit={handleSubmit}>
@@ -111,7 +115,9 @@ const page = () => {
               className="input input-bordered w-full max-w-xs"
             />
 
-            <button type="submit" className="btn btn-secondary ml-2">Creer l&apos;entreprise</button>
+            <button type="submit" className="btn btn-secondary ml-2">
+              Creer l&apos;entreprise
+            </button>
           </div>
         </form>
 
@@ -123,18 +129,17 @@ const page = () => {
           </div>
         ) : companies && companies.length > 0 ? (
           <ul className="list-decimal divide-base-200 divide-y">
-
             {companies.map((company) => (
               <li key={company.id}>
-                {company.name}
+                <div className="badge badge-secondary badge-outline">
+                  {company.name}
+                </div>
               </li>
             ))}
-
           </ul>
         ) : (
           <p>Aucune entreprise trouvée</p>
         )}
-
       </div>
     </Wrapper>
   );
