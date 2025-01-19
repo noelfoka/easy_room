@@ -94,6 +94,17 @@ const page = () => {
     setLoading(false);
   }, [user]);
 
+  const handleDelete = async (companyId: string) => {
+    try {
+      
+    } catch (error) {
+      console.error(error);
+      setNotification(
+        "Une erreur est survenue lors de la suppression de l'entreprise"
+      );
+    }
+  }
+
   return (
     <Wrapper>
       {notification && (
