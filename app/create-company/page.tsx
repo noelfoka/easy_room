@@ -112,7 +112,8 @@ const page = () => {
         // Si la reponse n'est pas bonne
         if (!response.ok) {
           const { message } = await response.json();
-          throw new Error(message);
+          setNotification(message);
+          return;
         }
         setNotification("L'entreprise a été supprimée avec succès");
         fetchCompanies();
