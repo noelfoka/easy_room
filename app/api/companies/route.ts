@@ -137,6 +137,11 @@ export async function DELETE(request: Request) {
       }
     })
 
+    // Supprimer la company
+    await prisma.company.delete({
+      where: {id}
+    });
+
   } catch (error) {
     console.error("Erreur api companies", error);
     return NextResponse.json(
