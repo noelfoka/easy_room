@@ -129,6 +129,14 @@ export async function DELETE(request: Request) {
       );
     }
 
+    // mettre à jour la liste des employés de cette entreprise
+    await prisma.user.updateMany({
+      where: {companyId: id},
+      data: {
+        companyId: null
+      }
+    })
+
   } catch (error) {
     console.error("Erreur api companies", error);
     return NextResponse.json(
