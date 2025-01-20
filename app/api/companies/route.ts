@@ -204,6 +204,14 @@ export async function PATCH(request: Request) {
         where: {email: employeeEmail}
       });
 
+      // Vérifier si l'mployé est associé à l'entreprise actuelle
+      if (employee?.companyId === company.id) {
+        return NextResponse.json(
+          { message: `${employeeEmail} est déjà associé à cette entreprise` },
+          { status: 400 }
+        );
+      }
+
     } else if (action === "DELETE") {}
     
   } catch (error) {
