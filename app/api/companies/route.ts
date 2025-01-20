@@ -244,6 +244,14 @@ export async function PATCH(request: Request) {
         { status: 201 }
       );
     } else if (action === "DELETE") {
+
+      // Vérifier que l'employé existe
+      const employee = await prisma.user.findUnique({
+        where: { email: employeeEmail }
+      });
+
+      
+
     }
   } catch (error) {
     console.error("Erreur api companies", error);
