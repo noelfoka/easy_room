@@ -34,6 +34,19 @@ const page = ({ params }: { params: { companyId: string } }) => {
         ) : ( */}
         <div>
           <h1 className="text-2xl mb-4">Ajouter un nouvel employé</h1>
+
+          <form>
+            <div className="mb-4 flex flex-row">
+              <input
+                type="email"
+                className="input input-bordered w-full max-w-xs"
+                value={employeeEmail}
+                onChange={(e) => setEmployeeEmail(e.target.value)}
+                placeholder="Email de l'employé"
+                required
+              />
+            </div>
+          </form>
         </div>
         {/* )} */}
       </div>
