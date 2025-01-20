@@ -212,6 +212,14 @@ export async function PATCH(request: Request) {
         );
       }
 
+      // Si l'employé existe et appartien à une autre entreprise
+      if (employee?.companyId !== company.id) {
+        return NextResponse.json(
+          { message: `${employeeEmail} est déjà associé à une autre entreprise` },
+          { status: 400 }
+        );
+      }
+
     } else if (action === "DELETE") {}
     
   } catch (error) {
