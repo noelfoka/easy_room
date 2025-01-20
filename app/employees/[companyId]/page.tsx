@@ -32,6 +32,8 @@ const page = ({ params }: { params: { companyId: string } }) => {
         action: "ADD"
       })
     });
+
+    const data  = await response.json();
   };
 
   return (
