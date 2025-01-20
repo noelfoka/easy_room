@@ -200,7 +200,7 @@ export async function PATCH(request: Request) {
     if (action === "ADD") {
 
       // Vérifier si l'employé existe déjà dans la liste des employés de l'entreprise
-      const employee = await prisma.user.findUnique({
+      let employee = await prisma.user.findUnique({
         where: {email: employeeEmail}
       });
 
@@ -213,12 +213,29 @@ export async function PATCH(request: Request) {
       }
 
       // Si l'employé existe et appartien à une autre entreprise
-      if (employee?.companyId !== company.id) {
+      if (employee?.companyId && employee?.companyId !== company.id) {
         return NextResponse.json(
           { message: `${employeeEmail} est déjà associé à une autre entreprise` },
           { status: 400 }
         );
       }
+
+      //Si l'mployé n'existe pas, on le crée en tant qu'un utilisateur
+      if (!employee) {
+        employee = await prisma.user.create({
+          data: {email: employeeEmail, companyId: company.id}
+        })
+      } else {
+        employee = await prisma.user.update({
+          where: {id: employee.id},
+          data: {companyId: company.id}
+        })
+      }
+
+      await prisma.company.update({
+        where: {id: company.id},
+        data: {employees: {connect: {id: employee.id}}}
+      })
 
     } else if (action === "DELETE") {}
     
