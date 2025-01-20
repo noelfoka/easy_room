@@ -155,3 +155,8 @@ export async function DELETE(request: Request) {
     );
   }
 }
+
+// Api qui permet d'ajouter et supprimer des employés à une entreprise
+export async function PATCH(request: Request) {
+  
+}
