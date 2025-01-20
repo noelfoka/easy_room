@@ -187,6 +187,14 @@ export async function PATCH(request: Request) {
         { status: 404 }
       );
     }
+
+    // Vérifier que le createur est bien celui qui a créé l'entreprise
+    if (company.createdById !== creator.id) {
+      return NextResponse.json(
+        { message: "Vous n'avez pas les droits pour modifier cette entreprise" },
+        { status: 403 }
+      );
+    }
     
   } catch (error) {
     console.error("Erreur api companies", error);
