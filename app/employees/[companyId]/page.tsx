@@ -36,6 +36,13 @@ const page = ({ params }: { params: { companyId: string } }) => {
 
     const data  = await response.json();
 
+    if (response.ok) {
+      setNotification("L'employé a été ajouté avec succès");
+      setEmployeeEmail("");
+    } else {
+      setNotification("Une erreur est survenue lors de l'ajout de l'employé");
+    }
+
     } catch (error) {
       console.error(error);
       setNotification("Une erreur est survenue lors de l'ajout de l'employé");
