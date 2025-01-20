@@ -45,6 +45,7 @@ const page = ({ params }: { params: { companyId: string } }) => {
                 placeholder="Email de l'employé"
                 required
               />
+              <button type="submit" className="btn btn-secondary ml-2">Ajouter un employé</button>
             </div>
           </form>
         </div>
