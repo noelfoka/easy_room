@@ -159,6 +159,9 @@ export async function DELETE(request: Request) {
 // Api qui permet d'ajouter et supprimer des employés à une entreprise
 export async function PATCH(request: Request) {
   try {
+
+    // Extraire les données du corps de la requête
+    const {id, creatorEmail, employeeEmail, action} = await request.json();
     
   } catch (error) {
     console.error("Erreur api companies", error);
