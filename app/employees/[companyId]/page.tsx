@@ -17,6 +17,10 @@ const page = ({ params }: { params: { companyId: string } }) => {
     setNotification("");
   };
 
+  const handleAddEmployee = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+  };
+
   return (
     <Wrapper>
       {notification && (
@@ -35,7 +39,7 @@ const page = ({ params }: { params: { companyId: string } }) => {
         <div>
           <h1 className="text-2xl mb-4">Ajouter un nouvel employé</h1>
 
-          <form>
+          <form onSubmit={handleAddEmployee}>
             <div className="mb-4 flex flex-row">
               <input
                 type="email"
