@@ -17,8 +17,21 @@ const page = ({ params }: { params: { companyId: string } }) => {
     setNotification("");
   };
 
-  const handleAddEmployee = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleAddEmployee = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    const response = await fetch("/api/employees", {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        id: params.companyId,
+        creatorEmail: user?.email,
+        employeeEmail: employeeEmail,
+        action: "ADD"
+      })
+    });
   };
 
   return (
