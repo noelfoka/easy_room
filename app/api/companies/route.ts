@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import prisma from "@/prisma/lib/prisma";
+import { disconnect } from "process";
 
 // Api de création de companies
 export async function POST(request: Request) {
@@ -257,6 +258,17 @@ export async function PATCH(request: Request) {
           { status: 404 }
         );
       }
+
+      await prisma.company.update({
+        where: {id: company.id},
+        data: {
+          employees: {
+            disconnect: {
+              id: employee.id
+            }
+          }
+        }
+      })
 
     }
   } catch (error) {
