@@ -158,5 +158,13 @@ export async function DELETE(request: Request) {
 
 // Api qui permet d'ajouter et supprimer des employés à une entreprise
 export async function PATCH(request: Request) {
-  
+  try {
+    
+  } catch (error) {
+    console.error("Erreur api companies", error);
+    return NextResponse.json(
+      { message: "Une erreur est survenue lors de la suppression de l'employé" },
+      { status: 500 }
+    );
+  }
 }
