@@ -166,7 +166,15 @@ export async function PATCH(request: Request) {
     // Vérifier l'existance du createur de l'entreprise
     const creator = await prisma.user.findUnique({
       where: {email: creatorEmail}
-    })
+    });
+
+    // Si le createur n'existe pas
+    if (!creator) {
+      return NextResponse.json(
+        { message: "Le createur de l'entreprise n'existe pas" },
+        { status: 404 }
+      );
+    }
     
   } catch (error) {
     console.error("Erreur api companies", error);
