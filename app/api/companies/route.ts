@@ -96,11 +96,10 @@ export async function GET(request: Request) {
 
     // Récupérer la liste des entreprises de l'utilisateur
     const companies = await prisma.company.findMany({
-      where: {createdById: user.id}
+      where: { createdById: user.id },
     });
 
-    return NextResponse.json({companies},  { status: 200 });
-
+    return NextResponse.json({ companies }, { status: 200 });
   } catch (error) {
     console.error("Erreur api companies", error);
     return NextResponse.json(
@@ -118,8 +117,8 @@ export async function DELETE(request: Request) {
 
     // Vérifier si l'entreprise existe
     const company = await prisma.company.findUnique({
-      where: {id}
-    })
+      where: { id },
+    });
 
     // Vérifier si on a cette entreprise
     if (!company) {
@@ -131,26 +130,27 @@ export async function DELETE(request: Request) {
 
     // mettre à jour la liste des employés de cette entreprise
     await prisma.user.updateMany({
-      where: {companyId: id},
+      where: { companyId: id },
       data: {
-        companyId: null
-      }
-    })
+        companyId: null,
+      },
+    });
 
     // Supprimer la company
     await prisma.company.delete({
-      where: {id}
+      where: { id },
     });
 
     return NextResponse.json(
       { message: "L'entreprise a été supprimée avec succès" },
       { status: 200 }
     );
-
   } catch (error) {
     console.error("Erreur api companies", error);
     return NextResponse.json(
-      { message: "Une erreur est survenue lors de la suppression de la company" },
+      {
+        message: "Une erreur est survenue lors de la suppression de la company",
+      },
       { status: 500 }
     );
   }
@@ -159,13 +159,12 @@ export async function DELETE(request: Request) {
 // Api qui permet d'ajouter et supprimer des employés à une entreprise
 export async function PATCH(request: Request) {
   try {
-
     // Extraire les données du corps de la requête
-    const {id, creatorEmail, employeeEmail, action} = await request.json();
+    const { id, creatorEmail, employeeEmail, action } = await request.json();
 
     // Vérifier l'existance du createur de l'entreprise
     const creator = await prisma.user.findUnique({
-      where: {email: creatorEmail}
+      where: { email: creatorEmail },
     });
 
     // Si le createur n'existe pas
@@ -178,7 +177,7 @@ export async function PATCH(request: Request) {
 
     // Vérifier si l'entreprise identifiée par l'id existe
     const company = await prisma.company.findUnique({
-      where: {id}
+      where: { id },
     });
 
     if (!company) {
@@ -191,17 +190,18 @@ export async function PATCH(request: Request) {
     // Vérifier que le createur est bien celui qui a créé l'entreprise
     if (company.createdById !== creator.id) {
       return NextResponse.json(
-        { message: "Vous n'avez pas les droits pour modifier cette entreprise" },
+        {
+          message: "Vous n'avez pas les droits pour modifier cette entreprise",
+        },
         { status: 403 }
       );
     }
 
     // Ajouter l'employé à la liste des employés de l'entreprise
     if (action === "ADD") {
-
       // Vérifier si l'employé existe déjà dans la liste des employés de l'entreprise
       let employee = await prisma.user.findUnique({
-        where: {email: employeeEmail}
+        where: { email: employeeEmail },
       });
 
       // Vérifier si l'mployé est associé à l'entreprise actuelle
@@ -215,7 +215,9 @@ export async function PATCH(request: Request) {
       // Si l'employé existe et appartien à une autre entreprise
       if (employee?.companyId && employee?.companyId !== company.id) {
         return NextResponse.json(
-          { message: `${employeeEmail} est déjà associé à une autre entreprise` },
+          {
+            message: `${employeeEmail} est déjà associé à une autre entreprise`,
+          },
           { status: 400 }
         );
       }
@@ -223,26 +225,32 @@ export async function PATCH(request: Request) {
       //Si l'mployé n'existe pas, on le crée en tant qu'un utilisateur
       if (!employee) {
         employee = await prisma.user.create({
-          data: {email: employeeEmail, companyId: company.id}
-        })
+          data: { email: employeeEmail, companyId: company.id },
+        });
       } else {
         employee = await prisma.user.update({
-          where: {id: employee.id},
-          data: {companyId: company.id}
-        })
+          where: { id: employee.id },
+          data: { companyId: company.id },
+        });
       }
 
       await prisma.company.update({
-        where: {id: company.id},
-        data: {employees: {connect: {id: employee.id}}}
-      })
+        where: { id: company.id },
+        data: { employees: { connect: { id: employee.id } } },
+      });
 
-    } else if (action === "DELETE") {}
-    
+      return NextResponse.json(
+        { message: "L'employé a été ajouté avec succes" },
+        { status: 201 }
+      );
+    } else if (action === "DELETE") {
+    }
   } catch (error) {
     console.error("Erreur api companies", error);
     return NextResponse.json(
-      { message: "Une erreur est survenue lors de la suppression de l'employé" },
+      {
+        message: "Une erreur est survenue lors de la suppression de l'employé",
+      },
       { status: 500 }
     );
   }
