@@ -270,6 +270,11 @@ export async function PATCH(request: Request) {
         }
       })
 
+      return NextResponse.json(
+        { message: "L'employé a été supprimé avec succès" },
+        { status: 200 }
+      );
+
     }
   } catch (error) {
     console.error("Erreur api companies", error);
