@@ -195,6 +195,16 @@ export async function PATCH(request: Request) {
         { status: 403 }
       );
     }
+
+    // Ajouter l'employé à la liste des employés de l'entreprise
+    if (action === "ADD") {
+
+      // Vérifier si l'employé existe déjà dans la liste des employés de l'entreprise
+      const employee = await prisma.user.findUnique({
+        where: {email: employeeEmail}
+      });
+
+    } else if (action === "DELETE") {}
     
   } catch (error) {
     console.error("Erreur api companies", error);
