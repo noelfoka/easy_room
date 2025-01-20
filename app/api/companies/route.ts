@@ -171,10 +171,15 @@ export async function PATCH(request: Request) {
     // Si le createur n'existe pas
     if (!creator) {
       return NextResponse.json(
-        { message: "Le createur de l'entreprise n'existe pas" },
+        { message: "Le createur de l'entreprise non trouvé" },
         { status: 404 }
       );
     }
+
+    // Vérifier si l'entreprise identifiée par l'id existe
+    const company = await prisma.company.findUnique({
+      where: {id}
+    });
     
   } catch (error) {
     console.error("Erreur api companies", error);
