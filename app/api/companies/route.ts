@@ -162,6 +162,11 @@ export async function PATCH(request: Request) {
 
     // Extraire les données du corps de la requête
     const {id, creatorEmail, employeeEmail, action} = await request.json();
+
+    // Vérifier l'existance du createur de l'entreprise
+    const creator = await prisma.user.findUnique({
+      where: {email: creatorEmail}
+    })
     
   } catch (error) {
     console.error("Erreur api companies", error);
