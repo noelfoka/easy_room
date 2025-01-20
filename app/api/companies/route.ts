@@ -250,7 +250,13 @@ export async function PATCH(request: Request) {
         where: { email: employeeEmail }
       });
 
-      
+      // Vérifier que l'employé existe
+      if (!employee) {
+        return NextResponse.json(
+          { message: "L'employé n'existe pas" },
+          { status: 404 }
+        );
+      }
 
     }
   } catch (error) {
