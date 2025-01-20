@@ -180,6 +180,13 @@ export async function PATCH(request: Request) {
     const company = await prisma.company.findUnique({
       where: {id}
     });
+
+    if (!company) {
+      return NextResponse.json(
+        { message: "L'entreprise non trouvée" },
+        { status: 404 }
+      );
+    }
     
   } catch (error) {
     console.error("Erreur api companies", error);
