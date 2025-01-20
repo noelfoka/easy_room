@@ -26,3 +26,14 @@ Content-Type: application/json
 {
   "id": "cm60fjak10003viq0hcrdci08"
 }
+
+###
+PATCH http://localhost:3000/api/companies
+Content-Type: application/json
+
+{
+  "id" : "cm611sfzt0005viq0mh4i9wcp",
+  "creatorEmail" : "nomgnenoel@gmail.com",
+  "employeeEmail" : "nono@gmail.com",
+  "action": "DELETE"
+}
