@@ -20,20 +20,26 @@ const page = ({ params }: { params: { companyId: string } }) => {
   const handleAddEmployee = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    const response = await fetch("/api/employees", {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        id: params.companyId,
-        creatorEmail: user?.email,
-        employeeEmail: employeeEmail,
-        action: "ADD"
-      })
-    });
+    try {
+      const response = await fetch("/api/employees", {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          id: params.companyId,
+          creatorEmail: user?.email,
+          employeeEmail: employeeEmail,
+          action: "ADD"
+        })
+      });
 
     const data  = await response.json();
+
+    } catch (error) {
+      console.error(error);
+      setNotification("Une erreur est survenue lors de l'ajout de l'employé");
+    }
   };
 
   return (
