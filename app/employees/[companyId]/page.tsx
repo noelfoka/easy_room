@@ -49,6 +49,15 @@ const page = ({ params }: { params: { companyId: string } }) => {
     }
   };
 
+  const fetchEmployees = async () => {
+    try {
+      
+    } catch (error) {
+      console.error(error);
+      setNotification("Erreur survenue lors de la récupération des employés");
+    }
+  }
+
   return (
     <Wrapper>
       {notification && (
