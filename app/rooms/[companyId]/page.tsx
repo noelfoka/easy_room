@@ -21,6 +21,11 @@ const page = ({ params }: { params: { companyId: string } }) => {
       )}
 
       <div>{params.companyId}</div>
+
+      <section className="w-[450px] ml-8 hidden md:block">
+        <h1 className="text-2xl mb-4">Créer une salle</h1>
+      </section>
+
     </Wrapper>
   );
 };
