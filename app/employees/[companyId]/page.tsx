@@ -18,7 +18,7 @@ const page = ({ params }: { params: { companyId: string } }) => {
   const [employeeEmail, setEmployeeEmail] = useState<string>("");
   const [companyName, setCompanyName] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(true);
-  const [employees, setEmployees] = useState<Employee[] | null>(null);
+  const [employees, setEmployees] = useState<Employee[] | null>([]);
 
   const [notification, setNotification] = useState<string>("");
   const closeNotification = () => {
@@ -71,6 +71,9 @@ const page = ({ params }: { params: { companyId: string } }) => {
 
       // Récupérer les employés de la company
       const data = await response.json();
+      setEmployees(data.employees);
+      setCompanyName(data.company);
+      setLoading(false);
       
     } catch (error) {
       console.error(error);
@@ -94,7 +97,7 @@ const page = ({ params }: { params: { companyId: string } }) => {
           </div>
         ) : ( */}
         <div>
-          <h1 className="text-2xl mb-4">Ajouter un nouvel employé</h1>
+          <h1 className="text-2xl mb-4">Ajouter un nouvel employé à {companyName}</h1>
 
           <form onSubmit={handleAddEmployee}>
             <div className="mb-4 flex flex-row">
