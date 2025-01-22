@@ -38,10 +38,10 @@ const page = ({ params }: { params: { companyId: string } }) => {
 
     if (response.ok) {
       setNotification("L'employé a été ajouté avec succès");
-      setEmployeeEmail("");
     } else {
       setNotification(`${data.message}`);
     }
+    setEmployeeEmail("");
 
     } catch (error) {
       console.error(error);
