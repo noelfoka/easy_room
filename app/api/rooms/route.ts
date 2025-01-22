@@ -19,7 +19,15 @@ export async function POST(request: Request) {
           { status: 400 }
         );
       }
-      
+
+      // Vérification de l'existence de la salle pour cette entreprise
+      const existingRoom = await prisma.room.findFirst({
+        where: {
+          name: name,
+          companyId: companyId
+        }
+      })
+
     } else if (action === "SAVE_IMAGE") {}
 
   } catch (error) {
