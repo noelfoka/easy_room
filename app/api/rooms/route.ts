@@ -59,6 +59,14 @@ export async function POST(request: Request) {
         );
       }
 
+      // Mettre à jour la salle
+      const updatedRoom = await prisma.room.update({
+        where: {id: roomId},
+        data: {
+          imgUrl,
+        },
+      });
+
     }
   } catch (error) {
     console.error("Erreur api rooms", error);
