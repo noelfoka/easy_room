@@ -54,7 +54,9 @@ const page = ({ params }: { params: { companyId: string } }) => {
 
         {/* Uploader un fichier */}
         <div>
-          <div></div>
+          <div>
+            {/* file upload */}
+          </div>
         </div>
       </section>
     </Wrapper>

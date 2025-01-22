@@ -1,6 +1,14 @@
+"use client"
+
 import React from 'react'
 
-const FileUpload = () => {
+interface FileUploadProps {
+  onFileChange: (file: File | null) => void
+  accept?: string
+  buttonLabel?: string
+}
+
+const FileUpload: React.FC<FileUploadProps> = ({ onFileChange, accept, buttonLabel }) => {
   return (
     <div>FileUpload</div>
   )
