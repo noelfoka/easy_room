@@ -8,6 +8,25 @@ export async function GET(request: Request) {
     // Extraire l'id de la company à récupérer
     const { searchParams } = new URL(request.url);
     const companyId = searchParams.get("companyId");
+
+    // Vérifier si l'id de la company est fourni
+    if (!companyId) {
+      return NextResponse.json(
+        { message: "L'id de la company est obligatoire" },
+        { status: 400 }
+      );
+    }
+
+    // Récupérer les employés de la company
+    const employees = await prisma.user.findMany({
+      where: { companyId },
+      select: {
+        id: true,
+        email: true,
+        familyName: true,
+        givenName: true
+      }
+    });
     
   } catch (error) {
     console.error("Erreur api employees", error);
