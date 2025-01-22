@@ -29,12 +29,21 @@ export async function GET(request: Request) {
     });
 
     // Récupérer le nom de la company
-    const company = await prisma.company.findMany({
+    const company = await prisma.company.findUnique({
       where: { id: companyId },
       select: {
         name: true
       }
     })
+
+    const formatedEmployees = employees.map((employee) => ({
+      id: employee.id,
+      email: employee.email,
+      familyName: employee.familyName || null,
+      givenName: employee.givenName || null,
+    }))
+
+    return NextResponse.json({employees: formatedEmployees, company: company?.name}, {status: 200});
     
   } catch (error) {
     console.error("Erreur api employees", error);
