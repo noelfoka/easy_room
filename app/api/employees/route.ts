@@ -6,7 +6,7 @@ export async function GET(request: Request) {
   try {
 
     // Extraire l'id de la company à récupérer
-    const searchParams = new URL(request.url);
+    const { searchParams } = new URL(request.url);
     const companyId = searchParams.get("companyId");
     
   } catch (error) {
