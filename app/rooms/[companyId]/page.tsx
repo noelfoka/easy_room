@@ -45,8 +45,12 @@ const page = ({ params }: { params: { companyId: string } }) => {
           onChange={(e) => setCapacity(e.target.value)}
         />
 
-        <textarea value={description} placeholder="Description de la salle" className="textarea textarea-bordered w-full max-w-xs mb-4" onChange={(e) => setDescription(e.target.value)}></textarea>
-
+        <textarea
+          value={description}
+          placeholder="Description de la salle"
+          className="textarea textarea-bordered w-full max-w-xs mb-4"
+          onChange={(e) => setDescription(e.target.value)}
+        ></textarea>
       </section>
     </Wrapper>
   );
