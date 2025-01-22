@@ -53,6 +53,13 @@ const page = ({ params }: { params: { companyId: string } }) => {
     try {
 
       const response = await fetch(`/api/employees?companyId=${params.companyId}`);
+
+      // Vérifier la réponse du serveur
+      if (!response.ok) {
+        const data = await response.json();
+        throw new Error(data.message);
+        return;
+      }
       
     } catch (error) {
       console.error(error);
