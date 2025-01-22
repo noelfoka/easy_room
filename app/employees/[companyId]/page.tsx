@@ -60,6 +60,9 @@ const page = ({ params }: { params: { companyId: string } }) => {
         throw new Error(data.message);
         return;
       }
+
+      // Récupérer les employés de la company
+      const data = await response.json();
       
     } catch (error) {
       console.error(error);
