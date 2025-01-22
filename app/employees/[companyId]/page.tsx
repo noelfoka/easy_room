@@ -3,7 +3,7 @@
 
 import Wrapper from "@/app/components/Wrapper";
 import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Notification from "@/app/components/Notification";
 
 interface Employee {
@@ -81,6 +81,10 @@ const page = ({ params }: { params: { companyId: string } }) => {
     }
   }
 
+  useEffect(() => {
+    fetchEmployees();
+  }, [params.companyId]);
+
   return (
     <Wrapper>
       {notification && (
@@ -97,7 +101,8 @@ const page = ({ params }: { params: { companyId: string } }) => {
           </div>
         ) : ( 
         <div>
-          <h1 className="text-2xl mb-4">Ajouter un nouvel employé à {companyName}</h1>
+          <div className="badge badge-secondary badge-outline mb-2">{companyName}</div>
+          <h1 className="text-2xl mb-4">Ajouter un nouvel employé</h1>
 
           <form onSubmit={handleAddEmployee}>
             <div className="mb-4 flex flex-row">
