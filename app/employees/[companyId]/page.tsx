@@ -21,7 +21,7 @@ const page = ({ params }: { params: { companyId: string } }) => {
     e.preventDefault();
 
     try {
-      const response = await fetch("/api/employees", {
+      const response = await fetch("/api/companies", {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
@@ -40,12 +40,12 @@ const page = ({ params }: { params: { companyId: string } }) => {
       setNotification("L'employé a été ajouté avec succès");
       setEmployeeEmail("");
     } else {
-      setNotification("Une erreur est survenue lors de l'ajout de l'employé");
+      setNotification(`${data.message}`);
     }
 
     } catch (error) {
       console.error(error);
-      setNotification("Une erreur est survenue lors de l'ajout de l'employé");
+      setNotification("Erreur interne du serveur");
     }
   };
 
