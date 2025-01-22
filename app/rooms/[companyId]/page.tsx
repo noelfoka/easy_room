@@ -1,11 +1,28 @@
-"use client"
+/* eslint-disable react-hooks/rules-of-hooks */
+"use client";
 
-import React from 'react'
+import Wrapper from "@/app/components/Wrapper";
+import React, { useState } from "react";
+import Notification from "@/app/components/Notification";
 
 const page = ({ params }: { params: { companyId: string } }) => {
-  return (
-    <div>{params.companyId}</div>
-  )
-}
+  const [notification, setNotification] = useState<string>("");
+  const closeNotification = () => {
+    setNotification("");
+  };
 
-export default page
+  return (
+    <Wrapper>
+      {notification && (
+        <Notification
+          message={notification}
+          onClose={closeNotification}
+        ></Notification>
+      )}
+
+      <div>{params.companyId}</div>
+    </Wrapper>
+  );
+};
+
+export default page;
