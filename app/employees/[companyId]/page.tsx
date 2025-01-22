@@ -51,6 +51,8 @@ const page = ({ params }: { params: { companyId: string } }) => {
 
   const fetchEmployees = async () => {
     try {
+
+      const response = await fetch(`/api/employees?companyId=${params.companyId}`);
       
     } catch (error) {
       console.error(error);
