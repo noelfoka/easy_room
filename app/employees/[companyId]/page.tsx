@@ -57,6 +57,36 @@ const page = ({ params }: { params: { companyId: string } }) => {
     }
   };
 
+  const handleRemoveEmployee = async (employeeEmail: string) => {
+    try {
+      const response = await fetch("/api/companies", {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          id: params.companyId,
+          creatorEmail: user?.email,
+          employeeEmail: employeeEmail,
+          action: "DELETE",
+        }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setNotification("L'employé a été retiré de la company");
+        fetchEmployees();
+      } else {
+        setNotification(`${data.message}`);
+      }
+      setEmployeeEmail("");
+    } catch (error) {
+      console.error(error);
+      setNotification("Erreur interne du serveur");
+    }
+  };
+
   const fetchEmployees = async () => {
     try {
       const response = await fetch(
@@ -134,7 +164,6 @@ const page = ({ params }: { params: { companyId: string } }) => {
                         key={employee.id}
                         className="py-4 flex flex-col md:flex-row items-start md:items-center justify-between"
                       >
-
                         <div className="flex items-center md:mb-0">
                           <span
                             className={`relative flex h-3 w-3 mr-2 rounded-full ${
@@ -156,15 +185,22 @@ const page = ({ params }: { params: { companyId: string } }) => {
                                 ? `${employee.givenName} ${employee.familyName}`
                                 : "Pas encore inscrit"}
                             </div>
-                            <button className="btn btn-outline btn-secondary btn-sm mt-2 md:mt-0 flex md:hidden">
+                            <button
+                              className="btn btn-outline btn-secondary btn-sm mt-2 md:mt-0 flex md:hidden"
+                              onClick={() =>
+                                handleRemoveEmployee(employee.email)
+                              }
+                            >
                               Retirer
                             </button>
                           </div>
-
                         </div>
 
                         <div>
-                          <button className="btn btn-outline btn-secondary btn-sm mt-2 md:mt-0 md:flex hidden">
+                          <button
+                            className="btn btn-outline btn-secondary btn-sm mt-2 md:mt-0 md:flex hidden"
+                            onClick={() => handleRemoveEmployee(employee.email)}
+                          >
                             Retirer
                           </button>
                         </div>
