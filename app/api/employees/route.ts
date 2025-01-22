@@ -27,6 +27,14 @@ export async function GET(request: Request) {
         givenName: true
       }
     });
+
+    // Récupérer le nom de la company
+    const company = await prisma.company.findMany({
+      where: { id: companyId },
+      select: {
+        name: true
+      }
+    })
     
   } catch (error) {
     console.error("Erreur api employees", error);
