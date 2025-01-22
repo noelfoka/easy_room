@@ -40,3 +40,25 @@ Content-Type: application/json
 
 ###
 GET http://localhost:3000/api/employees?companyId=cm611sfzt0005viq0mh4i9wcp
+
+###
+POST http://localhost:3000/api/rooms
+Content-Type: application/json
+
+{
+  "action": "SAVE_DATA",
+  "name": "Salle de réunion",
+  "capacity": 100,
+  "description": "Salle de réunion pour les équipes de l'entreprise",
+  "companyId": "cm60fh5uf0002viq0tg3hcds9"
+}
+
+###
+POST http://localhost:3000/api/rooms
+Content-Type: application/json
+
+{
+  "action": "SAVE_IMAGE",
+  "imgUrl": "image.jpg",
+  "roomId": "cm682gaug0000vip0up4feo1i"
+}
