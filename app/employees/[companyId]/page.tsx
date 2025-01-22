@@ -91,11 +91,11 @@ const page = ({ params }: { params: { companyId: string } }) => {
       )}
 
       <div>
-        {/* {loading ? (
+        {loading ? (
           <div className="text-center mt-32">
             <span className="loading loading-spinner loading-lg"></span>
           </div>
-        ) : ( */}
+        ) : ( 
         <div>
           <h1 className="text-2xl mb-4">Ajouter un nouvel employé à {companyName}</h1>
 
@@ -113,7 +113,7 @@ const page = ({ params }: { params: { companyId: string } }) => {
             </div>
           </form>
         </div>
-        {/* )} */}
+        )} 
       </div>
     </Wrapper>
   );
