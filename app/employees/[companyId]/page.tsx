@@ -6,11 +6,19 @@ import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
 import React, { useState } from "react";
 import Notification from "@/app/components/Notification";
 
+interface Employee {
+  id: string;
+  email: string;
+  familyName: string | null;
+  givenName: string | null;
+}
+
 const page = ({ params }: { params: { companyId: string } }) => {
   const { user } = useKindeBrowserClient();
   const [employeeEmail, setEmployeeEmail] = useState<string>("");
   const [companyName, setCompanyName] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(true);
+  const [employees, setEmployees] = useState<Employee[] | null>(null);
 
   const [notification, setNotification] = useState<string>("");
   const closeNotification = () => {
