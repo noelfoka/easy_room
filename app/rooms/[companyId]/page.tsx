@@ -6,6 +6,10 @@ import React, { useState } from "react";
 import Notification from "@/app/components/Notification";
 
 const page = ({ params }: { params: { companyId: string } }) => {
+
+  // Variales d'etat
+  const [file, setFile] = useState<File | null>(null);
+
   const [notification, setNotification] = useState<string>("");
   const closeNotification = () => {
     setNotification("");
