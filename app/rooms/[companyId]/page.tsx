@@ -51,6 +51,11 @@ const page = ({ params }: { params: { companyId: string } }) => {
           className="textarea textarea-bordered w-full max-w-xs mb-4"
           onChange={(e) => setDescription(e.target.value)}
         ></textarea>
+
+        {/* Uploader un fichier */}
+        <div>
+          <div></div>
+        </div>
       </section>
     </Wrapper>
   );
