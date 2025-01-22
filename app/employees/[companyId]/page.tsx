@@ -134,19 +134,40 @@ const page = ({ params }: { params: { companyId: string } }) => {
                         key={employee.id}
                         className="py-4 flex flex-col md:flex-row items-start md:items-center justify-between"
                       >
+
                         <div className="flex items-center md:mb-0">
-                          <span className={`relative flex h-3 w-3 mr-2 rounded-full ${hasFullName ? "bg-green-500" : "bg-red-500"}`}>
-                            <span className={`animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75 ${hasFullName ? "bg-green-500" : "bg-red-500"}`}></span>
+                          <span
+                            className={`relative flex h-3 w-3 mr-2 rounded-full ${
+                              hasFullName ? "bg-green-500" : "bg-red-500"
+                            }`}
+                          >
+                            <span
+                              className={`animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75 ${
+                                hasFullName ? "bg-green-500" : "bg-red-500"
+                              }`}
+                            ></span>
                             <span className="relative inline-flex rounded-full h-3 w-3"></span>
                           </span>
+
                           <div>
                             <span className="font-bold">{employee.email}</span>
                             <div className="md:mb-0 italic mt-1 text-gray-400">
-                              {hasFullName ? `${employee.givenName} ${employee.familyName}` : "Pas encore inscrit"}
+                              {hasFullName
+                                ? `${employee.givenName} ${employee.familyName}`
+                                : "Pas encore inscrit"}
                             </div>
+                            <button className="btn btn-outline btn-secondary btn-sm mt-2 md:mt-0 flex md:hidden">
+                              Retirer
+                            </button>
                           </div>
+
                         </div>
-                          <button className="btn btn-outline btn-secondary btn-sm mt-2 md:mt-0 flex md:hidden">Retirer</button>
+
+                        <div>
+                          <button className="btn btn-outline btn-secondary btn-sm mt-2 md:mt-0 md:flex hidden">
+                            Retirer
+                          </button>
+                        </div>
                       </li>
                     );
                   })}
