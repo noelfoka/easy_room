@@ -38,19 +38,19 @@ const page = ({ params }: { params: { companyId: string } }) => {
           id: params.companyId,
           creatorEmail: user?.email,
           employeeEmail: employeeEmail,
-          action: "ADD"
-        })
+          action: "ADD",
+        }),
       });
 
-    const data  = await response.json();
+      const data = await response.json();
 
-    if (response.ok) {
-      setNotification("L'employé a été ajouté avec succès");
-    } else {
-      setNotification(`${data.message}`);
-    }
-    setEmployeeEmail("");
-
+      if (response.ok) {
+        setNotification("L'employé a été ajouté avec succès");
+        fetchEmployees();
+      } else {
+        setNotification(`${data.message}`);
+      }
+      setEmployeeEmail("");
     } catch (error) {
       console.error(error);
       setNotification("Erreur interne du serveur");
@@ -59,8 +59,9 @@ const page = ({ params }: { params: { companyId: string } }) => {
 
   const fetchEmployees = async () => {
     try {
-
-      const response = await fetch(`/api/employees?companyId=${params.companyId}`);
+      const response = await fetch(
+        `/api/employees?companyId=${params.companyId}`
+      );
 
       // Vérifier la réponse du serveur
       if (!response.ok) {
@@ -74,12 +75,11 @@ const page = ({ params }: { params: { companyId: string } }) => {
       setEmployees(data.employees);
       setCompanyName(data.company);
       setLoading(false);
-      
     } catch (error) {
       console.error(error);
       setNotification("Erreur survenue lors de la récupération des employés");
     }
-  }
+  };
 
   useEffect(() => {
     fetchEmployees();
@@ -99,26 +99,64 @@ const page = ({ params }: { params: { companyId: string } }) => {
           <div className="text-center mt-32">
             <span className="loading loading-spinner loading-lg"></span>
           </div>
-        ) : ( 
-        <div>
-          <div className="badge badge-secondary badge-outline mb-2">{companyName}</div>
-          <h1 className="text-2xl mb-4">Ajouter un nouvel employé</h1>
-
-          <form onSubmit={handleAddEmployee}>
-            <div className="mb-4 flex flex-row">
-              <input
-                type="email"
-                className="input input-bordered w-full max-w-xs"
-                value={employeeEmail}
-                onChange={(e) => setEmployeeEmail(e.target.value)}
-                placeholder="Email de l'employé"
-                required
-              />
-              <button type="submit" className="btn btn-secondary ml-2">Ajouter un employé</button>
+        ) : (
+          <div>
+            <div className="badge badge-secondary badge-outline mb-2">
+              {companyName}
             </div>
-          </form>
-        </div>
-        )} 
+            <h1 className="text-2xl mb-4">Ajouter un nouvel employé</h1>
+
+            <form onSubmit={handleAddEmployee}>
+              <div className="mb-4 flex flex-row">
+                <input
+                  type="email"
+                  className="input input-bordered w-full max-w-xs"
+                  value={employeeEmail}
+                  onChange={(e) => setEmployeeEmail(e.target.value)}
+                  placeholder="Email de l'employé"
+                  required
+                />
+                <button type="submit" className="btn btn-secondary ml-2">
+                  Ajouter un employé
+                </button>
+              </div>
+            </form>
+
+            <h1 className="text-2xl mb-4">Liste des employés</h1>
+            <div className="mt-4">
+              {employees && employees.length > 0 ? (
+                <ol className="divide-base-200 divide-y">
+                  {employees.map((employee) => {
+                    const hasFullName =
+                      employee.familyName && employee.givenName;
+                    return (
+                      <li
+                        key={employee.id}
+                        className="py-4 flex flex-col md:flex-row items-start md:items-center justify-between"
+                      >
+                        <div className="flex items-center md:mb-0">
+                          <span className={`relative flex h-3 w-3 mr-2 rounded-full ${hasFullName ? "bg-green-500" : "bg-red-500"}`}>
+                            <span className={`animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75 ${hasFullName ? "bg-green-500" : "bg-red-500"}`}></span>
+                            <span className="relative inline-flex rounded-full h-3 w-3"></span>
+                          </span>
+                          <div>
+                            <span className="font-bold">{employee.email}</span>
+                            <div className="md:mb-0 italic mt-1 text-gray-400">
+                              {hasFullName ? `${employee.givenName} ${employee.familyName}` : "Pas encore inscrit"}
+                            </div>
+                          </div>
+                        </div>
+                          <button className="btn btn-outline btn-secondary btn-sm mt-2 md:mt-0 flex md:hidden">Retirer</button>
+                      </li>
+                    );
+                  })}
+                </ol>
+              ) : (
+                <p>Aucun employé trouvé</p>
+              )}
+            </div>
+          </div>
+        )}
       </div>
     </Wrapper>
   );
