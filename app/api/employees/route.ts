@@ -4,7 +4,6 @@ import prisma from "@/prisma/lib/prisma";
 // Api permettant de récupérer les employés d'une entreprise
 export async function GET(request: Request) {
   try {
-
     // Extraire l'id de la company à récupérer
     const { searchParams } = new URL(request.url);
     const companyId = searchParams.get("companyId");
@@ -24,33 +23,38 @@ export async function GET(request: Request) {
         id: true,
         email: true,
         familyName: true,
-        givenName: true
-      }
+        givenName: true,
+      },
     });
 
     // Récupérer le nom de la company
-    const company = await prisma.company.findUnique({
+    const company = await prisma.company.findFirst({
       where: { id: companyId },
       select: {
-        name: true
-      }
-    })
+        name: true,
+      },
+    });
 
+    // Formater les employés pour renvoyer
     const formatedEmployees = employees.map((employee) => ({
       id: employee.id,
       email: employee.email,
       familyName: employee.familyName || null,
       givenName: employee.givenName || null,
-    }))
+    }));
 
-    return NextResponse.json({employees: formatedEmployees, company: company?.name}, {status: 200});
-    
+    return NextResponse.json(
+      { employees: formatedEmployees, company: company?.name },
+      { status: 200 }
+    );
+
   } catch (error) {
     console.error("Erreur api employees", error);
     return NextResponse.json(
-      { message: "Une erreur est survenue lors de la récupération des employés" },
+      {
+        message: "Une erreur est survenue lors de la récupération des employés",
+      },
       { status: 500 }
     );
-    
   }
 }
