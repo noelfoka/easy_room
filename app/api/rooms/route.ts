@@ -28,6 +28,13 @@ export async function POST(request: Request) {
         }
       })
 
+      if (existingRoom) {
+        return NextResponse.json(
+          { message: "Cette salle existe déjà" },
+          { status: 400 }
+        );
+      }
+
     } else if (action === "SAVE_IMAGE") {}
 
   } catch (error) {
