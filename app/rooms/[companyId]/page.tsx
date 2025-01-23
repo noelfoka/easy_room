@@ -123,6 +123,11 @@ const page = ({ params }: { params: { companyId: string } }) => {
   const fetchRooms = async () => {
     try {
       const response = await fetch(`/api/rooms?companyId=${params.companyId}`);
+
+      if (!response.ok) {
+        throw new Error("Erreur lors de la récupération des salles");
+      }
+
     } catch (error) {
       console.error(error);
       setNotification(
