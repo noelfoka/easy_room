@@ -198,11 +198,12 @@ const page = ({ params }: { params: { companyId: string } }) => {
                       />
 
                       <div className="md:ml-4 md:w-2/3">
-                        <div className="flex itmes-center">
+                        <div className="flex items-center">
                           <div className="badge badge-secondary">
                           <Users className="mr-2 w-4" />
                           {room.capacity}
                           </div>
+                          <h1 className="font-bold text-xl ml-2">{room.name}</h1>
                         </div>
                       </div>
 
