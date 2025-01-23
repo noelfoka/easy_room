@@ -8,6 +8,14 @@ import Notification from "@/app/components/Notification";
 import FileUpload from "@/app/components/FileUpload";
 import { useEdgeStore } from "@/lib/edgestore";
 
+interface Room {
+  id: string;
+  name: string;
+  capacity: number;
+  description: string;
+  imgUrl: string;
+}
+
 const page = ({ params }: { params: { companyId: string } }) => {
   const edgestore = useEdgeStore();
 
@@ -20,6 +28,7 @@ const page = ({ params }: { params: { companyId: string } }) => {
   const [description, setDescription] = useState("");
   const [progress, setProgress] = useState<number>(0);
   const [loading, setLoading] = useState<boolean>(true);
+  const [rooms, setRooms] = useState<Room[]>([]);
 
   const [notification, setNotification] = useState<string>("");
   const closeNotification = () => {
