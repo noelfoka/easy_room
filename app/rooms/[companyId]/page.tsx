@@ -128,6 +128,8 @@ const page = ({ params }: { params: { companyId: string } }) => {
         throw new Error("Erreur lors de la récupération des salles");
       }
 
+      const data = await response.json();
+
     } catch (error) {
       console.error(error);
       setNotification(
