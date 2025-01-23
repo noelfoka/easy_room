@@ -130,10 +130,12 @@ const page = ({ params }: { params: { companyId: string } }) => {
 
       {/* You can open the modal using document.getElementById('ID').showModal() method */}
       <button
-        className="btn"
-        onClick={() => (document.getElementById("my_modal") as HTMLDialogElement).showModal()}
+        className="btn my-2 btn-outline btn-secondary w-fit flex md:hidden"
+        onClick={() =>
+          (document.getElementById("my_modal") as HTMLDialogElement).showModal()
+        }
       >
-        open modal
+        Creer salle
       </button>
       <dialog id="my_modal" className="modal">
         <div className="modal-box">
@@ -143,8 +145,67 @@ const page = ({ params }: { params: { companyId: string } }) => {
               ✕
             </button>
           </form>
-          <h3 className="font-bold text-lg">Hello!</h3>
-          <p className="py-4">Press ESC key or click on ✕ button to close</p>
+          <section className="w-full">
+            <h1 className="text-2xl mb-4">Créer une salle</h1>
+
+            <input
+              type="text"
+              value={name}
+              placeholder="Nom de la salle"
+              className="input input-bordered w-full mb-4"
+              onChange={(e) => setName(e.target.value)}
+            />
+
+            <input
+              type="number"
+              value={capacity}
+              placeholder="Capacité de la salle"
+              className="input input-bordered w-full mb-4"
+              onChange={(e) => setCapacity(e.target.value)}
+            />
+
+            <textarea
+              value={description}
+              placeholder="Description de la salle"
+              className="textarea textarea-bordered w-full mb-4"
+              onChange={(e) => setDescription(e.target.value)}
+            ></textarea>
+
+            {/* Uploader un fichier */}
+            <div>
+              <div className="p-5 rounded-lg bg-secondary/5 border border-base-300">
+                {/* file upload */}
+                <FileUpload
+                  onFileChange={handleFileChange}
+                  accept="image/*"
+                  buttonLabel="Uploader une image"
+                />
+
+                {/* Afficher le fichier uploadé */}
+                {file && (
+                  <p className="border border-base-300 p-3 mt-4 rounded-lg">
+                    <span className="text-sm">{file.name}</span>
+                    {progress > 0 && (
+                      <p>
+                        <progress
+                          className="progress progress-secondary w-56"
+                          value={progress}
+                          max="100"
+                        ></progress>
+                        <span className="text-sm">{progress}%</span>
+                      </p>
+                    )}
+                  </p>
+                )}
+              </div>
+            </div>
+            <button
+              className="btn btn-secondary btn-outline btn-sm mt-4"
+              onClick={handleUpload}
+            >
+              Créer une salle
+            </button>
+          </section>
         </div>
       </dialog>
 
