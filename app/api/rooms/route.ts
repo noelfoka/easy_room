@@ -85,6 +85,17 @@ export async function POST(request: Request) {
 // Api d'affichage des salles
 export async function GET(request: Request) {
   try {
+
+    const { searchParams } = new URL(request.url);
+    const companyId = searchParams.get("companyId");
+
+    // Vérifier si l'id de la company est fourni
+    if (!companyId) {
+      return NextResponse.json(
+        { message: "L'id de la company est obligatoire" },
+        { status: 400 }
+      );
+    }
     
   } catch (error) {
     console.error("Erreur api rooms", error);
