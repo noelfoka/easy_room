@@ -125,12 +125,20 @@ export async function DELETE(request: Request) {
     // Récupération des paramètres de la requête
     const { roomId } = await request.json();
 
+    // Vérification que le paramètre de salle est présent
     if (!roomId) {
       return NextResponse.json(
         { message: "Aucun paramètre de salle n'a été fourni" },
         { status: 400 }
       );
     }
+
+    // Suppression de la salle
+    await prisma.room.delete({
+      where: {
+        id: roomId,
+      },
+    });
     
   } catch (error) {
     console.error("Erreur api rooms", error);
