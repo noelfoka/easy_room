@@ -20,7 +20,7 @@ const page = ({ params }: { params: { companyId: string } }) => {
   const [name, setName] = useState("");
   const [capacity, setCapacity] = useState("");
   const [description, setDescription] = useState("");
-  const [progress, setProgress] = useState<number | null>(0);
+  const [progress, setProgress] = useState<number>(0);
 
   const [notification, setNotification] = useState<string>("");
   const closeNotification = () => {
@@ -63,7 +63,7 @@ const page = ({ params }: { params: { companyId: string } }) => {
         if (file) {
           const res = await edgestore.publicFiles.upload({
             file,
-            onprogress: (progress: React.SetStateAction<number | null>) => {
+            onprogress: (progress: React.SetStateAction<number>) => {
               setProgress(progress);
             }
           })
@@ -163,6 +163,11 @@ const page = ({ params }: { params: { companyId: string } }) => {
             {file && (
               <p className="border border-base-300 p-3 mt-4 rounded-lg">
                 <span className="text-sm">{file.name}</span>
+                {progress > 0 && (
+                <p>
+                  <progress className="progress progress-secondary w-56" value="100" max="100"></progress>
+                </p>
+              )}
               </p>
             )}
           </div>
