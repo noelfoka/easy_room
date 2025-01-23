@@ -49,6 +49,7 @@ const page = ({ params }: { params: { companyId: string } }) => {
       // Si la reponse est  bonne
       if (apiResponse.ok) {
         const room = await apiResponse.json();
+        alert(room.roomId);
       }
       
     } catch (error) {
