@@ -38,7 +38,7 @@ const page = ({ params }: { params: { companyId: string } }) => {
           type="text"
           value={name}
           placeholder="Nom de la salle"
-          className="input input-bordered w-full max-w-xs mb-4"
+          className="input input-bordered w-full mb-4"
           onChange={(e) => setName(e.target.value)}
         />
 
@@ -46,20 +46,20 @@ const page = ({ params }: { params: { companyId: string } }) => {
           type="number"
           value={capacity}
           placeholder="Capacité de la salle"
-          className="input input-bordered w-full max-w-xs mb-4"
+          className="input input-bordered w-full mb-4"
           onChange={(e) => setCapacity(e.target.value)}
         />
 
         <textarea
           value={description}
           placeholder="Description de la salle"
-          className="textarea textarea-bordered w-full max-w-xs mb-4"
+          className="textarea textarea-bordered w-full mb-4"
           onChange={(e) => setDescription(e.target.value)}
         ></textarea>
 
         {/* Uploader un fichier */}
         <div>
-          <div className="p-5 rounded-lg">
+          <div className="p-5 rounded-lg bg-secondary/5 border border-base-300">
             {/* file upload */}
             <FileUpload
               onFileChange={handleFileChange}
