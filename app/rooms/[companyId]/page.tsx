@@ -8,7 +8,7 @@ import Notification from "@/app/components/Notification";
 import FileUpload from "@/app/components/FileUpload";
 import { useEdgeStore } from "@/lib/edgestore";
 import Image from "next/image";
-import { User } from "lucide-react";
+import { Users } from "lucide-react";
 
 interface Room {
   id: string;
@@ -200,7 +200,8 @@ const page = ({ params }: { params: { companyId: string } }) => {
                       <div className="md:ml-4 md:w-2/3">
                         <div className="flex itmes-center">
                           <div className="badge badge-secondary">
-                          <User />
+                          <Users className="mr-2 w-4" />
+                          {room.capacity}
                           </div>
                         </div>
                       </div>
