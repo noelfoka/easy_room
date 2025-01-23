@@ -66,8 +66,16 @@ const page = ({ params }: { params: { companyId: string } }) => {
               accept="image/*"
               buttonLabel="Uploader une image"
             />
+
+            {/* Afficher le fichier uploadé */}
+            {file && (
+              <p className="border border-base-300 p-3 mt-4 rounded-lg">
+                <span className="text-sm">{file.name}</span>
+              </p>
+            )}
           </div>
         </div>
+        <button className="btn btn-secondary btn-outline btn-sm mt-4">Créer une salle</button>
       </section>
     </Wrapper>
   );
