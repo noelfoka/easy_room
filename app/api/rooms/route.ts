@@ -101,6 +101,11 @@ export async function GET(request: Request) {
     const rooms = await prisma.room.findMany({
       where: { companyId: companyId }
     });
+
+    // Récupérer le nom de la company
+    const company = await prisma.company.findUnique({
+      where: { id: companyId }
+    });
     
   } catch (error) {
     console.error("Erreur api rooms", error);
