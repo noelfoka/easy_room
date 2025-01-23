@@ -96,6 +96,11 @@ export async function GET(request: Request) {
         { status: 400 }
       );
     }
+
+    // Récupérer les salles de la company
+    const rooms = await prisma.room.findMany({
+      where: { companyId: companyId }
+    });
     
   } catch (error) {
     console.error("Erreur api rooms", error);
