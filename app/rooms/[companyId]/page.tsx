@@ -163,6 +163,16 @@ const page = ({ params }: { params: { companyId: string } }) => {
     if (!confirmed) return;
 
     try {
+
+      const response = await fetch(`/api/rooms`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          roomId,
+        }),
+      });
       
     } catch (error) {
       console.error("Error deleting room:", error);
