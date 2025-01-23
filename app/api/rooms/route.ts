@@ -139,6 +139,10 @@ export async function DELETE(request: Request) {
         id: roomId,
       },
     });
+
+    return NextResponse.json({ message: "Salle supprimée avec succès" }, {
+      status: 200,
+    });
     
   } catch (error) {
     console.error("Erreur api rooms", error);
