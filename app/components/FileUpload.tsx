@@ -16,6 +16,11 @@ const FileUpload: React.FC<FileUploadProps> = ({ onFileChange, accept="image/*",
     const file = e.target.files?.[0] || null;
     onFileChange(file);
   };
+
+  const handleClick = () => {
+    fileInputRef.current?.click();
+  };
+
   return (
     <div>FileUpload</div>
   )
