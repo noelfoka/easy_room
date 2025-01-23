@@ -1,14 +1,18 @@
-"use client"
+"use client";
 
-import React, { useRef } from 'react'
+import React, { useRef } from "react";
 
 interface FileUploadProps {
-  onFileChange: (file: File | null) => void
-  accept?: string
-  buttonLabel?: string
+  onFileChange: (file: File | null) => void;
+  accept?: string;
+  buttonLabel?: string;
 }
 
-const FileUpload: React.FC<FileUploadProps> = ({ onFileChange, accept="image/*", buttonLabel="Uploader une image" }) => {
+const FileUpload: React.FC<FileUploadProps> = ({
+  onFileChange,
+  accept = "image/*",
+  buttonLabel = "Uploader une image",
+}) => {
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
   // fonction qui permet de mettre à jour le fileInputRef
@@ -22,8 +26,19 @@ const FileUpload: React.FC<FileUploadProps> = ({ onFileChange, accept="image/*",
   };
 
   return (
-    <div>FileUpload</div>
-  )
-}
+    <div>
+      <input
+        type="file"
+        ref={fileInputRef}
+        accept={accept}
+        onChange={handleFileChange}
+        className="hidden"
+      />
 
-export default FileUpload
+      <div className="cursor-pointer"></div>
+
+    </div>
+  );
+};
+
+export default FileUpload;
