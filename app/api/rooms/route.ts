@@ -124,6 +124,13 @@ export async function DELETE(request: Request) {
 
     // Récupération des paramètres de la requête
     const { roomId } = await request.json();
+
+    if (!roomId) {
+      return NextResponse.json(
+        { message: "Aucun paramètre de salle n'a été fourni" },
+        { status: 400 }
+      );
+    }
     
   } catch (error) {
     console.error("Erreur api rooms", error);
