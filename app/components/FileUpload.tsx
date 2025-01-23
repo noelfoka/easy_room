@@ -8,7 +8,7 @@ interface FileUploadProps {
   buttonLabel?: string
 }
 
-const FileUpload: React.FC<FileUploadProps> = ({ onFileChange, accept, buttonLabel }) => {
+const FileUpload: React.FC<FileUploadProps> = ({ onFileChange, accept="image/*", buttonLabel="Uploader une image" }) => {
   return (
     <div>FileUpload</div>
   )
