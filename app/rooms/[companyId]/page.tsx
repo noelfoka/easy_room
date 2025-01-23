@@ -6,7 +6,6 @@ import Wrapper from "@/app/components/Wrapper";
 import React, { use, useRef, useState } from "react";
 import Notification from "@/app/components/Notification";
 import FileUpload from "@/app/components/FileUpload";
-import { edgeStoreRawSdk } from "@edgestore/server/core";
 import { useEdgeStore } from "@/lib/edgestore";
 
 const page = ({ params }: { params: { companyId: string } }) => {
@@ -67,7 +66,7 @@ const page = ({ params }: { params: { companyId: string } }) => {
               setProgress(progress);
             },
           })
-          console.log("file uploaded", res);
+          console.log("file uploaded", res.url);
 
           const imageResponse = await fetch("/api/rooms", {
             method: "POST",
@@ -76,9 +75,15 @@ const page = ({ params }: { params: { companyId: string } }) => {
             },
             body: JSON.stringify({
               action: "SAVE_IMAGE",
-              roomId: room.id,
+              roomId: room.roomId,
               imgUrl: res.url,
             }),
+          });
+
+          console.log("Données envoyées pour SAVE_IMAGE :", {
+            action: "SAVE_IMAGE",
+            roomId: room.roomId, // Vérifiez si roomId est correct
+            imgUrl: res.url, // Vérifiez si res.url est valide
           });
 
           if (imageResponse.ok) {
@@ -166,7 +171,7 @@ const page = ({ params }: { params: { companyId: string } }) => {
                 {progress > 0 && (
                 <p>
                   <progress className="progress progress-secondary w-56" value={progress} max="100"></progress>
-                  <span>{progress}%</span>
+                  <span className="text-sm">{progress}%</span>
                 </p>
               )}
               </p>
