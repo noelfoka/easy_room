@@ -62,3 +62,6 @@ Content-Type: application/json
   "imgUrl": "image.jpg",
   "roomId": "cm682gaug0000vip0up4feo1i"
 }
+
+###
+GET http://localhost:3000/api/rooms?companyId=cm611wsqx0006viq0jtkf0129
