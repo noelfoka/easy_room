@@ -22,6 +22,14 @@ const page = ({ params }: { params: { companyId: string } }) => {
     setFile(selectedFile);
   }
 
+  const handleUpload = async () => {
+    if(!name || !capacity || !description) {
+      setNotification("Les informations sont incomplètes");
+      return;
+    }
+    
+  }
+
   return (
     <Wrapper>
       {notification && (
@@ -75,7 +83,7 @@ const page = ({ params }: { params: { companyId: string } }) => {
             )}
           </div>
         </div>
-        <button className="btn btn-secondary btn-outline btn-sm mt-4">Créer une salle</button>
+        <button className="btn btn-secondary btn-outline btn-sm mt-4" onClick={handleUpload}>Créer une salle</button>
       </section>
     </Wrapper>
   );
