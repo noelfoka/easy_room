@@ -8,7 +8,7 @@ import Notification from "@/app/components/Notification";
 import FileUpload from "@/app/components/FileUpload";
 import { useEdgeStore } from "@/lib/edgestore";
 import Image from "next/image";
-import { Users } from "lucide-react";
+import { Trash2, Users } from "lucide-react";
 
 interface Room {
   id: string;
@@ -205,6 +205,11 @@ const page = ({ params }: { params: { companyId: string } }) => {
                           </div>
                           <h1 className="font-bold text-xl ml-2">{room.name}</h1>
                         </div>
+                          <p className="text-sm my-2 text-gray-500">{room.description}</p>
+                          {/* Bouton de supression */}
+                          <button className="btn mt-2 btn-secondary btn-outline btn-sm">
+                            <Trash2 />
+                          </button>
                       </div>
 
                     </li>
