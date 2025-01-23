@@ -3,7 +3,7 @@
 "use client";
 
 import Wrapper from "@/app/components/Wrapper";
-import React, { use, useRef, useState } from "react";
+import React, { use, useEffect, useRef, useState } from "react";
 import Notification from "@/app/components/Notification";
 import FileUpload from "@/app/components/FileUpload";
 import { useEdgeStore } from "@/lib/edgestore";
@@ -141,6 +141,7 @@ const page = ({ params }: { params: { companyId: string } }) => {
       const data = await response.json();
       setRooms(data.rooms);
       setCompanyName(data.companyName);
+      setLoading(false);
 
     } catch (error) {
       console.error(error);
@@ -149,6 +150,10 @@ const page = ({ params }: { params: { companyId: string } }) => {
       );
     }
   }
+
+  useEffect(() => {
+    fetchRooms();
+  }, [params.companyId]);
 
   return (
     <Wrapper>
