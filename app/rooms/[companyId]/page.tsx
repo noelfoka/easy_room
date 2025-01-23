@@ -158,20 +158,18 @@ const page = ({ params }: { params: { companyId: string } }) => {
     fetchRooms();
   }, [params.companyId]);
 
-  const handleDeleteRoom = async (roomId: string) => {
-    const res = await fetch("/api/rooms", {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        roomId,
-      }),
-    });
+  const handleDeleteRoom = async (roomId: string, imgUrl: string) => {
+    const confirmed = confirm("Êtes-vous sûr de vouloir supprimer cette salle ?");
+    if (!confirmed) return;
 
-    if (res.ok) {
-      fetchRooms();
+    try {
+      
+    } catch (error) {
+      console.error("Error deleting room:", error);
+      setNotification("Une erreur est survenue lors de la suppression de la salle");
     }
+
+
   };
 
   return (
@@ -223,7 +221,7 @@ const page = ({ params }: { params: { companyId: string } }) => {
                         </div>
                           <p className="text-sm my-2 text-gray-500">{room.description}</p>
                           {/* Bouton de supression */}
-                          <button className="btn mt-2 btn-secondary btn-outline btn-sm" onClick={() => handleDeleteRoom(room.id)}>
+                          <button className="btn mt-2 btn-secondary btn-outline btn-sm" onClick={() => handleDeleteRoom(room.id, room.imgUrl)}>
                             <Trash2 className="w-4" />
                           </button>
                       </div>
