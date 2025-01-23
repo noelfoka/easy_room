@@ -117,3 +117,16 @@ export async function GET(request: Request) {
     );
   }
 }
+
+// Api de suppression d'une salle
+export async function DELETE(request: Request) {
+  try {
+    
+  } catch (error) {
+    console.error("Erreur api rooms", error);
+    return NextResponse.json(
+      { message: "Une erreur est survenue lors de la suppression d'une salle" },
+      { status: 500 }
+    );
+  }
+}
