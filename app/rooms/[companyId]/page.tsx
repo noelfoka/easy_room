@@ -7,6 +7,7 @@ import React, { use, useEffect, useRef, useState } from "react";
 import Notification from "@/app/components/Notification";
 import FileUpload from "@/app/components/FileUpload";
 import { useEdgeStore } from "@/lib/edgestore";
+import Image from "next/image";
 
 interface Room {
   id: string;
@@ -175,7 +176,36 @@ const page = ({ params }: { params: { companyId: string } }) => {
             {companyName}
           </div>
 
-          <div>
+          <div className="flex flex-col-reverse md:flex-row">
+            <section className="w-full">
+              <h1 className="text-2xl mb-4 font-bold">Liste des salles</h1>
+
+              <ul>
+                {rooms.length > 0 ? (
+                  rooms.map((room) => (
+                    <li
+                      key={room.id}
+                      className="flex flex-col md:flex-row md:items-center mb-5 border border-base-300 p-5 rounded-2xl w-full min-h-60"
+                    >
+                      <Image
+                        src={room.imgUrl}
+                        alt={room.name}
+                        width={400}
+                        height={400}
+                        quality={100}
+                        className="shadow-sm w-full mb-4 md:mb-0 md:w-1/3 md:h-full object-cover rounded-xl"
+                      />
+                    </li>
+                  ))
+                ) : (
+                  <p>
+                    Votre entreprise n&apos;a pas encore créé de salle de
+                    réunion.
+                  </p>
+                )}
+              </ul>
+            </section>
+
             {/* You can open the modal using document.getElementById('ID').showModal() method */}
             <button
               className="btn my-2 btn-outline btn-secondary w-fit flex md:hidden"
