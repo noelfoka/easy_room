@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import prisma from "@/prisma/lib/prisma";
+import prisma from "@/lib/prisma";
 import { disconnect } from "process";
 
 // Api de création de companies

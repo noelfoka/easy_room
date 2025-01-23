@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import prisma from "@/prisma/lib/prisma";
+import prisma from "@/lib/prisma";
 
 // Api permettant de récupérer les employés d'une entreprise
 export async function GET(request: Request) {
