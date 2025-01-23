@@ -29,6 +29,7 @@ const page = ({ params }: { params: { companyId: string } }) => {
   const [progress, setProgress] = useState<number>(0);
   const [loading, setLoading] = useState<boolean>(true);
   const [rooms, setRooms] = useState<Room[]>([]);
+  const [companyName, setCompanyName] = useState("");
 
   const [notification, setNotification] = useState<string>("");
   const closeNotification = () => {
@@ -139,6 +140,7 @@ const page = ({ params }: { params: { companyId: string } }) => {
 
       const data = await response.json();
       setRooms(data.rooms);
+      setCompanyName(data.companyName);
 
     } catch (error) {
       console.error(error);
