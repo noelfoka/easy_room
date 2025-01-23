@@ -65,3 +65,11 @@ Content-Type: application/json
 
 ###
 GET http://localhost:3000/api/rooms?companyId=cm611wsqx0006viq0jtkf0129
+
+###
+DELETE http://localhost:3000/api/rooms
+Content-Type: application/json
+
+{
+  "roomId": "cm69e9kph0004viaswai937yg"
+}
