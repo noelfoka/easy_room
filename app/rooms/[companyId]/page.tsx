@@ -3,7 +3,7 @@
 "use client";
 
 import Wrapper from "@/app/components/Wrapper";
-import React, { use, useState } from "react";
+import React, { use, useRef, useState } from "react";
 import Notification from "@/app/components/Notification";
 import FileUpload from "@/app/components/FileUpload";
 import { edgeStoreRawSdk } from "@edgestore/server/core";
@@ -12,6 +12,8 @@ import { useEdgeStore } from "@/lib/edgestore";
 const page = ({ params }: { params: { companyId: string } }) => {
 
   const edgestore = useEdgeStore();
+
+    const fileInputRef = useRef<HTMLInputElement | null>(null);
 
   // Variales d'etat
   const [file, setFile] = useState<File | null>(null);
@@ -97,6 +99,13 @@ const page = ({ params }: { params: { companyId: string } }) => {
         setDescription("");
         setProgress(0);
         setFile(null);
+
+        if(fileInputRef.current) {
+          fileInputRef.current.value = '';
+        }
+      } else {
+        const result = await apiResponse.json();
+        setNotification(`${result.message}`);
       }
       
     } catch (error) {
