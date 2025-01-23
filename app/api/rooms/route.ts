@@ -121,6 +121,9 @@ export async function GET(request: Request) {
 // Api de suppression d'une salle
 export async function DELETE(request: Request) {
   try {
+
+    // Récupération des paramètres de la requête
+    const { roomId } = await request.json();
     
   } catch (error) {
     console.error("Erreur api rooms", error);
