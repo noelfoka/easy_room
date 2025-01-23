@@ -4,6 +4,7 @@
 import Wrapper from "@/app/components/Wrapper";
 import React, { useState } from "react";
 import Notification from "@/app/components/Notification";
+import FileUpload from "@/app/components/FileUpload";
 
 const page = ({ params }: { params: { companyId: string } }) => {
   // Variales d'etat
@@ -16,6 +17,10 @@ const page = ({ params }: { params: { companyId: string } }) => {
   const closeNotification = () => {
     setNotification("");
   };
+
+  const handleFileChange = (selectedFile: File | null) => {
+    setFile(selectedFile);
+  }
 
   return (
     <Wrapper>
@@ -54,8 +59,13 @@ const page = ({ params }: { params: { companyId: string } }) => {
 
         {/* Uploader un fichier */}
         <div>
-          <div>
+          <div className="p-5 rounded-lg">
             {/* file upload */}
+            <FileUpload
+              onFileChange={handleFileChange}
+              accept="image/*"
+              buttonLabel="Uploader une image"
+            />
           </div>
         </div>
       </section>
