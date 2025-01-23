@@ -86,8 +86,17 @@ const page = ({ params }: { params: { companyId: string } }) => {
 
         // Si l'image a été uploadée
         if (imageUploadSuccess) {
+          setNotification("Salle créée avec succès et image uploadée");
 
-        }else {}
+        }else {
+          setNotification("Salle créée avec succès mais l'image n'a pas pu être uploadée");
+        }
+
+        setName("");
+        setCapacity("");
+        setDescription("");
+        setProgress(0);
+        setFile(null);
       }
       
     } catch (error) {
