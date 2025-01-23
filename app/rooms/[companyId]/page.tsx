@@ -138,6 +138,7 @@ const page = ({ params }: { params: { companyId: string } }) => {
       }
 
       const data = await response.json();
+      setRooms(data.rooms);
 
     } catch (error) {
       console.error(error);
