@@ -28,6 +28,12 @@ const page = ({ params }: { params: { companyId: string } }) => {
       return;
     }
     
+    try {
+      
+    } catch (error) {
+      console.error(error);
+      setNotification("Une erreur est survenue lors de la création de la salle");
+    }
   }
 
   return (
