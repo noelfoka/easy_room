@@ -2,16 +2,22 @@
 "use client";
 
 import Wrapper from "@/app/components/Wrapper";
-import React, { useState } from "react";
+import React, { use, useState } from "react";
 import Notification from "@/app/components/Notification";
 import FileUpload from "@/app/components/FileUpload";
+import { edgeStoreRawSdk } from "@edgestore/server/core";
+import { useEdgeStore } from "@/lib/edgestore";
 
 const page = ({ params }: { params: { companyId: string } }) => {
+
+  const edgestore = useEdgeStore();
+
   // Variales d'etat
   const [file, setFile] = useState<File | null>(null);
   const [name, setName] = useState("");
   const [capacity, setCapacity] = useState("");
   const [description, setDescription] = useState("");
+  const [progress, setProgress] = useState<number | null>(0);
 
   const [notification, setNotification] = useState<string>("");
   const closeNotification = () => {
@@ -49,7 +55,33 @@ const page = ({ params }: { params: { companyId: string } }) => {
       // Si la reponse est  bonne
       if (apiResponse.ok) {
         const room = await apiResponse.json();
-        alert(room.roomId);
+        
+        let imageUploadSuccess = false;
+        if (file) {
+          const res = await edgestore.publicFiles.upload({
+            file,
+            onprogress: (progress: React.SetStateAction<number | null>) => {
+              setProgress(progress);
+            }
+          })
+          console.log("file uploaded", res);
+
+          const imageResponse = await fetch("/api/rooms", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              action: "SAVE_IMAGE",
+              imgUrl: res.url,
+              roomId: room.id,
+            }),
+          });
+
+          if (imageResponse.ok) {
+            imageUploadSuccess = true;
+          }
+        }
       }
       
     } catch (error) {
