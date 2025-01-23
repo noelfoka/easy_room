@@ -109,6 +109,7 @@ const page = ({ params }: { params: { companyId: string } }) => {
           );
         }
 
+        fetchRooms();
         setName("");
         setCapacity("");
         setDescription("");
@@ -139,17 +140,17 @@ const page = ({ params }: { params: { companyId: string } }) => {
       }
 
       const data = await response.json();
+      console.log("le nom de la company est : ", data);
       setRooms(data.rooms);
-      setCompanyName(data.companyName);
+      setCompanyName(data.company);
       setLoading(false);
-
     } catch (error) {
       console.error(error);
       setNotification(
         "Une erreur est survenue lors de la récupération des salles"
       );
     }
-  }
+  };
 
   useEffect(() => {
     fetchRooms();
@@ -164,12 +165,16 @@ const page = ({ params }: { params: { companyId: string } }) => {
         ></Notification>
       )}
 
-
-        {loading ? (
-          <div className="text-center mt-32">
-            <span className="loading loading-spinner loading-lg"></span>
+      {loading ? (
+        <div className="text-center mt-32">
+          <span className="loading loading-spinner loading-lg"></span>
+        </div>
+      ) : (
+        <div>
+          <div className="badge badge-secondary badge-outline mb-2">
+            {companyName}
           </div>
-        ) : (
+
           <div>
             {/* You can open the modal using document.getElementById('ID').showModal() method */}
             <button
@@ -316,7 +321,8 @@ const page = ({ params }: { params: { companyId: string } }) => {
               </button>
             </section>
           </div>
-        )}
+        </div>
+      )}
     </Wrapper>
   );
 };
