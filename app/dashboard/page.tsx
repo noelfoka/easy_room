@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 "use client";
 
 import React, { useEffect, useState } from "react";
@@ -37,6 +38,25 @@ const page = () => {
       }
     }
   };
+
+  const fetchRooms = async () => {
+    if (companyId) {
+      setLoading(true);
+      try {
+
+        const response = await fetch(`/api/rooms?companyId=${companyId}`);
+        if (!response.ok) {
+          throw new Error("Erreur lors de la récupération des salles");
+        }
+        
+      } catch (error) {
+        console.error(error);
+        // setNotification(
+        //   "Une erreur est survenue lors de la récupération des salles"
+        // );
+      }
+    }
+  }
 
   // Appel de la fonction fetchCompanyId au chargement de la page
   useEffect(() => {
