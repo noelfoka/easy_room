@@ -61,11 +61,11 @@ const page = ({ params }: { params: { companyId: string } }) => {
         
         let imageUploadSuccess = false;
         if (file) {
-          const res = await edgestore.publicFiles.upload({
+          const res = await edgestore.edgestore.publicFiles.upload({
             file,
-            onprogress: (progress: React.SetStateAction<number>) => {
+            onProgressChange: (progress) => {
               setProgress(progress);
-            }
+            },
           })
           console.log("file uploaded", res);
 
@@ -76,8 +76,8 @@ const page = ({ params }: { params: { companyId: string } }) => {
             },
             body: JSON.stringify({
               action: "SAVE_IMAGE",
-              imgUrl: res.url,
               roomId: room.id,
+              imgUrl: res.url,
             }),
           });
 
@@ -165,7 +165,8 @@ const page = ({ params }: { params: { companyId: string } }) => {
                 <span className="text-sm">{file.name}</span>
                 {progress > 0 && (
                 <p>
-                  <progress className="progress progress-secondary w-56" value="100" max="100"></progress>
+                  <progress className="progress progress-secondary w-56" value={progress} max="100"></progress>
+                  <span>{progress}%</span>
                 </p>
               )}
               </p>
