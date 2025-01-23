@@ -8,6 +8,7 @@ import Notification from "@/app/components/Notification";
 import FileUpload from "@/app/components/FileUpload";
 import { useEdgeStore } from "@/lib/edgestore";
 import Image from "next/image";
+import { User } from "lucide-react";
 
 interface Room {
   id: string;
@@ -195,6 +196,15 @@ const page = ({ params }: { params: { companyId: string } }) => {
                         quality={100}
                         className="shadow-sm w-full mb-4 md:mb-0 md:w-1/3 md:h-full object-cover rounded-xl"
                       />
+
+                      <div className="md:ml-4 md:w-2/3">
+                        <div className="flex itmes-center">
+                          <div className="badge badge-secondary">
+                          <User />
+                          </div>
+                        </div>
+                      </div>
+
                     </li>
                   ))
                 ) : (
