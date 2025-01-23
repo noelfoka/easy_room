@@ -45,6 +45,11 @@ const page = ({ params }: { params: { companyId: string } }) => {
           companyId: params.companyId,
         }),
       })
+
+      // Si la reponse est  bonne
+      if (apiResponse.ok) {
+        const room = await apiResponse.json();
+      }
       
     } catch (error) {
       console.error(error);
