@@ -81,3 +81,16 @@ export async function POST(request: Request) {
     );
   }
 }
+
+// Api d'affichage des salles
+export async function GET(request: Request) {
+  try {
+    
+  } catch (error) {
+    console.error("Erreur api rooms", error);
+    return NextResponse.json(
+      { message: "Une erreur est survenue lors de l'affichage des salles" },
+      { status: 500 }
+    );
+  }
+}
