@@ -158,6 +158,22 @@ const page = ({ params }: { params: { companyId: string } }) => {
     fetchRooms();
   }, [params.companyId]);
 
+  const handleDeleteRoom = async (roomId: string) => {
+    const res = await fetch("/api/rooms", {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        roomId,
+      }),
+    });
+
+    if (res.ok) {
+      fetchRooms();
+    }
+  };
+
   return (
     <Wrapper>
       {notification && (
@@ -207,7 +223,7 @@ const page = ({ params }: { params: { companyId: string } }) => {
                         </div>
                           <p className="text-sm my-2 text-gray-500">{room.description}</p>
                           {/* Bouton de supression */}
-                          <button className="btn mt-2 btn-secondary btn-outline btn-sm">
+                          <button className="btn mt-2 btn-secondary btn-outline btn-sm" onClick={() => handleDeleteRoom(room.id)}>
                             <Trash2 className="w-4" />
                           </button>
                       </div>
