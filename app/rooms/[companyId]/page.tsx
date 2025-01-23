@@ -29,6 +29,22 @@ const page = ({ params }: { params: { companyId: string } }) => {
     }
     
     try {
+
+      // Vérifier si la creation de la salle est possible
+      const apiResponse = await fetch("/api/rooms", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          action: "SAVE_DATA",
+          name,
+          capacity,
+          description: description,
+          imgUrl: '',
+          companyId: params.companyId,
+        }),
+      })
       
     } catch (error) {
       console.error(error);
