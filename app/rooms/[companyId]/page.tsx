@@ -122,7 +122,7 @@ const page = ({ params }: { params: { companyId: string } }) => {
 
   const fetchRooms = async () => {
     try {
-      
+      const response = await fetch(`/api/rooms?companyId=${params.companyId}`);
     } catch (error) {
       console.error(error);
       setNotification(
