@@ -1,5 +1,6 @@
 "use client";
 
+import { ImageDown } from "lucide-react";
 import React, { useRef } from "react";
 
 interface FileUploadProps {
@@ -35,8 +36,13 @@ const FileUpload: React.FC<FileUploadProps> = ({
         className="hidden"
       />
 
-      <div className="cursor-pointer"></div>
-
+      <div
+        className="cursor-pointer w-full flex justify-center items-center flex-col-reverse"
+        onClick={handleClick}
+      >
+        <ImageDown className="mt-5 w-8" />
+        <span className="ml-2 font-bold">{buttonLabel}</span>
+      </div>
     </div>
   );
 };
