@@ -164,6 +164,10 @@ const page = ({ params }: { params: { companyId: string } }) => {
 
     try {
 
+      await edgestore.edgestore.publicFiles.delete({
+        url: imgUrl,
+      });
+
       const response = await fetch(`/api/rooms`, {
         method: "DELETE",
         headers: {
@@ -173,6 +177,14 @@ const page = ({ params }: { params: { companyId: string } }) => {
           roomId,
         }),
       });
+
+      if (response.ok) {
+        setNotification("Salle supprimée avec succès");
+        fetchRooms();
+      } else {
+        const errorData = await response.json();
+        setNotification(`Une erreur est survenue lors de la suppression de la salle ${errorData.message}`);
+      }
       
     } catch (error) {
       console.error("Error deleting room:", error);
