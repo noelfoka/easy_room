@@ -106,6 +106,8 @@ export async function GET(request: Request) {
     const company = await prisma.company.findUnique({
       where: { id: companyId }
     });
+
+    return NextResponse.json({ rooms, company: company?.name }, { status: 200 });
     
   } catch (error) {
     console.error("Erreur api rooms", error);
