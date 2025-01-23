@@ -51,7 +51,7 @@ export async function POST(request: Request) {
             id: user.id,
           },
         },
-        employees: { connect: { id: user.id } },
+        // employees: { connect: { id: user.id } },
       },
     });
 
