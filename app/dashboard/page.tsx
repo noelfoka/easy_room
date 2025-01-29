@@ -48,6 +48,8 @@ const page = () => {
         if (!response.ok) {
           throw new Error("Erreur lors de la récupération des salles");
         }
+
+        const data = await response.json();
         
       } catch (error) {
         console.error(error);
