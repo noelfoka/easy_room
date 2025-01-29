@@ -3,8 +3,10 @@
 import React, { useEffect, useState } from "react";
 import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
 import Wrapper from "../components/Wrapper";
+import Image from "next/image";
+import { Users } from "lucide-react";
 
-const Page = () => {
+const Page: React.FC = () => {
   const { user } = useKindeBrowserClient();
   const [companyId, setCompanyId] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
@@ -97,24 +99,57 @@ const Page = () => {
             </div>
           )}
 
-          <h1 className="text-2xl mt-4">Réserver une salle</h1>
+          <h1 className="text-2xl my-4">Réserver une salle</h1>
 
           {loading ? (
             <div className="text-center mt-32">
-            <span className="loading loading-spinner loading-lg"></span>
-          </div>
+              <span className="loading loading-spinner loading-lg"></span>
+            </div>
+          ) : !companyId ? (
+            <div>Vous n&apos;êtes pas associé à une entreprise</div>
+          ) : rooms.length === 0 ? (
+            <p>
+              Aucune salle n&apos;est disponible pour le moment pour votre
+              entreprise
+            </p>
           ) : (
-            !companyId ? (
-              <div>Vous n&apos;êtes pas associé à une entreprise</div>
-            ) : (
-              rooms.length === 0 ? (
-                <p>Aucune salle n&apos;est disponible pour le moment pour votre entreprise</p>
-              ) : (
-                <ul className="grid md:grid-cols-3 gap-4"></ul>
-              )
-            )
-          )}
+            <ul className="grid md:grid-cols-3 gap-4">
+              {rooms.length > 0 ? (
+                rooms.map((room) => (
+                  <li
+                    key={room.id}
+                    className="flex flex-col border border-base-300 p-5 rounded-2xl"
+                  >
+                    <Image
+                      src={room.imgUrl ? room.imgUrl : "/pexels.jpg"}
+                      alt={room.name}
+                      width={400}
+                      height={400}
+                      quality={100}
+                      className="shadow-sm w-full h-48 object-cover rounded-xl"
+                    />
 
+                    <div className="md:ml-4 md:w-2/3">
+                      <div className="flex items-center">
+                        <div className="badge badge-secondary">
+                          <Users className="mr-2 w-4" />
+                          {room.capacity}
+                        </div>
+                        <h1 className="font-bold text-xl ml-2">{room.name}</h1>
+                      </div>
+                      <p className="text-sm my-2 text-gray-500">
+                        {room.description}
+                      </p>
+                    </div>
+                  </li>
+                ))
+              ) : (
+                <p>
+                  Votre entreprise n&apos;a pas encore créé de salle de réunion.
+                </p>
+              )}
+            </ul>
+          )}
         </div>
       </div>
     </Wrapper>

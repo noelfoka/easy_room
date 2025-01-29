@@ -225,7 +225,7 @@ const page = ({ params }: { params: { companyId: string } }) => {
                       className="flex flex-col md:flex-row md:items-center mb-5 border border-base-300 p-5 rounded-2xl w-full min-h-60"
                     >
                       <Image
-                        src={room.imgUrl}
+                        src={room.imgUrl ? room.imgUrl: "/pexels.jpg"}
                         alt={room.name}
                         width={400}
                         height={400}
