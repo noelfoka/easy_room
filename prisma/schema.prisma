@@ -18,6 +18,7 @@ model User {
   companyId                    String?
   company                      Company? @relation("CompanyEmployees", fields: [companyId], references: [id])
   createdCompanies             Company[] @relation("CompanyCreator")
+  reservations                 Reservation[]
 }
 
 model Company {
@@ -37,4 +38,18 @@ model Room {
   imgUrl                       String?
   companyId                    String
   company                      Company @relation(fields: [companyId], references: [id])
+  reservations                 Reservation[]
+}
+
+model Reservation {
+  id                           String @id @default(cuid())
+  userId                       String
+  user                         User @relation(fields: [userId], references: [id])
+  roomId                       String
+  room                         Room @relation(fields: [roomId], references: [id])
+  reservationDate              String
+  startTime                    String
+  endTime                      String
+
+  @@unique([roomId, reservationDate, startTime])
 }
