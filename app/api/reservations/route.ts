@@ -17,9 +17,9 @@ export async function POST(request: NextRequest) {
     const { email, roomId, reservationDate, timeSlots }: ReservationRequest = JSON.parse(body);
 
     // Vérifier si les champs requis sont présents
-    if (!email || !roomId || !reservationDate || !timeSlots) {
+    if (!email || !roomId || !reservationDate || !timeSlots || !Array.isArray(timeSlots)) {
       return NextResponse.json(
-        { message: "Les informations sont incomplètes" },
+        { message: "Les informations sont incomplètes et timeSlots doit être un tableau" },
         { status: 400 }
       );
     }
