@@ -37,7 +37,6 @@ const Page = () => {
         } else {
           console.warn("companyId non trouvé dans la réponse API");
         }
-
       } catch (error) {
         console.error("Erreur lors de la récupération du companyId :", error);
       }
@@ -63,7 +62,6 @@ const Page = () => {
 
         setRooms(data.rooms || []);
         setCompanyName(data.company || "Nom inconnu");
-
       } catch (error) {
         console.error(error);
       } finally {
@@ -92,8 +90,31 @@ const Page = () => {
   return (
     <Wrapper>
       <div>
-        <div className="badge badge-secondary badge-outline">
-          {companyName}
+        <div>
+          {companyId && (
+            <div className="badge badge-secondary badge-outline">
+              {companyName}
+            </div>
+          )}
+
+          <h1 className="text-2xl mt-4">Réserver une salle</h1>
+
+          {loading ? (
+            <div className="text-center mt-32">
+            <span className="loading loading-spinner loading-lg"></span>
+          </div>
+          ) : (
+            !companyId ? (
+              <div>Vous n&apos;êtes pas associé à une entreprise</div>
+            ) : (
+              rooms.length === 0 ? (
+                <p>Aucune salle n&apos;est disponible pour le moment pour votre entreprise</p>
+              ) : (
+                <ul className="grid md:grid-cols-3 gap-4"></ul>
+              )
+            )
+          )}
+
         </div>
       </div>
     </Wrapper>
