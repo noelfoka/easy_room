@@ -13,7 +13,16 @@ export async function POST(request: NextRequest) {
   try {
 
     // recuperation des données de la requête
-    const { email, roomId, reservationDate, timeSlots } = await request.json();
+    const body = await request.text();
+    const { email, roomId, reservationDate, timeSlots }: ReservationRequest = JSON.parse(body);
+
+    // Vérifier si les champs requis sont présents
+    if (!email || !roomId || !reservationDate || !timeSlots) {
+      return NextResponse.json(
+        { message: "Les informations sont incomplètes" },
+        { status: 400 }
+      );
+    }
     
   } catch (error) {
     console.error("Erreur api reservations", error);
