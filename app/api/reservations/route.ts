@@ -30,6 +30,14 @@ export async function POST(request: NextRequest) {
         email: email,
       },
     });
+
+    // Si l'utilisateur n'est pas trouvé
+    if (!user) {
+      return NextResponse.json(
+        { message: "L'utilisateur n'est pas trouvé" },
+        { status: 400 }
+      );
+    }
     
   } catch (error) {
     console.error("Erreur api reservations", error);
