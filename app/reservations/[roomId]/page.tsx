@@ -1,8 +1,11 @@
+import Wrapper from '@/app/components/Wrapper'
 import React from 'react'
 
-const page = () => {
+const page = ({ params} : { params: { roomId: string } }) => {
   return (
-    <div>page</div>
+   <Wrapper>
+    <div>Reservation de la salle {params.roomId}</div>
+   </Wrapper>
   )
 }
 
