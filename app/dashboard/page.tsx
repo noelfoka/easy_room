@@ -58,12 +58,10 @@ const page = () => {
         const data = await response.json();
         setRooms(data.rooms);
         setCompanyName(data.companyName);
+        setLoading(false);
         
       } catch (error) {
         console.error(error);
-        // setNotification(
-        //   "Une erreur est survenue lors de la récupération des salles"
-        // );
       }
     }
   }
@@ -72,6 +70,7 @@ const page = () => {
   useEffect(() => {
     const initializeData = async () => {
       await fetchCompanyId();
+      await fetchRooms();
     };
     initializeData();
   }, [user]);
