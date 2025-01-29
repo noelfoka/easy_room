@@ -6,20 +6,29 @@ interface ReservationRequest {
   email: string;
   roomId: string;
   reservationDate: string;
-  timeSlots: string [];
+  timeSlots: string[];
 }
 
 export async function POST(request: NextRequest) {
   try {
-
     // recuperation des données de la requête
     const body = await request.text();
-    const { email, roomId, reservationDate, timeSlots }: ReservationRequest = JSON.parse(body);
+    const { email, roomId, reservationDate, timeSlots }: ReservationRequest =
+      JSON.parse(body);
 
     // Vérifier si les champs requis sont présents
-    if (!email || !roomId || !reservationDate || !timeSlots || !Array.isArray(timeSlots)) {
+    if (
+      !email ||
+      !roomId ||
+      !reservationDate ||
+      !timeSlots ||
+      !Array.isArray(timeSlots)
+    ) {
       return NextResponse.json(
-        { message: "Les informations sont incomplètes et timeSlots doit être un tableau" },
+        {
+          message:
+            "Les informations sont incomplètes et timeSlots doit être un tableau",
+        },
         { status: 400 }
       );
     }
@@ -49,13 +58,30 @@ export async function POST(request: NextRequest) {
 
         // Extraire les dates de début et de fin
         const [startDate, endDate] = timeSlot.split(" - ");
+
+        return prisma.reservation.create({
+          data: {
+            userId: user.id,
+            roomId: roomId,
+            reservationDate: reservationDate,
+            startTime: startDate,
+            endTime: endDate,
+          },
+        });
       })
-    )
-    
+    );
+    return NextResponse.json(
+      { reservations },
+      { status: 201 }
+    );
+
   } catch (error) {
     console.error("Erreur api reservations", error);
     return NextResponse.json(
-      { message: "Une erreur est survenue lors de la création de la reservation" },
+      {
+        message:
+          "Une erreur est survenue lors de la création de la reservation",
+      },
       { status: 500 }
     );
   }
