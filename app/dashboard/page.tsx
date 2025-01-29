@@ -4,7 +4,8 @@ import React, { useEffect, useState } from "react";
 import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
 import Wrapper from "../components/Wrapper";
 import Image from "next/image";
-import { Users } from "lucide-react";
+import { SquareArrowOutUpRight, Users } from "lucide-react";
+import Link from "next/link";
 
 const Page: React.FC = () => {
   const { user } = useKindeBrowserClient();
@@ -138,8 +139,18 @@ const Page: React.FC = () => {
                         <h1 className="font-bold text-xl ml-2">{room.name}</h1>
                       </div>
                       <p className="text-sm my-2 text-gray-500">
-                        {room.description.length > 100 ? `${room.description.slice(0, 100)}...` : room.description}
+                        {room.description.length > 100
+                          ? `${room.description.slice(0, 100)}...`
+                          : room.description}
                       </p>
+
+                      <Link
+                        className="btn btn-secondary btn-outline btn-sm mt-2"
+                        href={`/reservation/${room.id}`}
+                      >
+                        <SquareArrowOutUpRight className="w-4" />
+                        Reserver
+                      </Link>
                     </div>
                   </li>
                 ))
