@@ -43,6 +43,9 @@ export async function POST(request: NextRequest) {
     const reservations = await Promise.all(
       timeSlots.map(async (timeSlot) => {
         // Vérifier si le créneau est bien formé
+        if (!timeSlot.includes(" - ")) {
+          throw new Error(`Le créneau n'est pas bien formé: ${timeSlot}`);
+        }
       })
     )
     
