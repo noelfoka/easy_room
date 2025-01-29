@@ -5,10 +5,16 @@ import React, { useEffect, useState } from "react";
 import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
 import Wrapper from "../components/Wrapper";
 
+interface RoomsProps {
+  rooms: unknown[];
+}
+
 const page = () => {
   const { user } = useKindeBrowserClient();
   const [companyId, setCompanyId] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
+  const [rooms, setRooms] = useState<unknown[]>([]);
+  const [companyName, setCompanyName] = useState<string>('');
 
   const fetchCompanyId = async () => {
     // Vérifier si il y a un user connecté
@@ -50,6 +56,8 @@ const page = () => {
         }
 
         const data = await response.json();
+        setRooms(data.rooms);
+        setCompanyName(data.companyName);
         
       } catch (error) {
         console.error(error);
