@@ -1,6 +1,6 @@
 // Api route pour les reservations
 import { NextRequest, NextResponse } from "next/server";
-import { PrismaClient } from "@prisma/client";
+import prisma from "@/lib/prisma";
 
 interface ReservationRequest {
   email: string;
@@ -23,6 +23,13 @@ export async function POST(request: NextRequest) {
         { status: 400 }
       );
     }
+
+    // Recherche de l'utilisateur par email
+    const user = await prisma.user.findUnique({
+      where: {
+        email: email,
+      },
+    });
     
   } catch (error) {
     console.error("Erreur api reservations", error);
