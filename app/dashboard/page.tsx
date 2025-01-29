@@ -146,7 +146,7 @@ const Page: React.FC = () => {
 
                       <Link
                         className="btn btn-secondary btn-outline btn-sm mt-2"
-                        href={`/reservation/${room.id}`}
+                        href={`/reservations/${room.id}`}
                       >
                         <SquareArrowOutUpRight className="w-4" />
                         Reserver
