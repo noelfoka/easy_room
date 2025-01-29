@@ -11,6 +11,9 @@ interface ReservationRequest {
 
 export async function POST(request: NextRequest) {
   try {
+
+    // recuperation des données de la requête
+    const { email, roomId, reservationDate, timeSlots } = await request.json();
     
   } catch (error) {
     console.error("Erreur api reservations", error);
