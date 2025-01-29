@@ -1,24 +1,21 @@
-/* eslint-disable react-hooks/rules-of-hooks */
 "use client";
 
 import React, { useEffect, useState } from "react";
 import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
 import Wrapper from "../components/Wrapper";
 
-interface RoomsProps {
-  rooms: unknown[];
-}
-
-const page = () => {
+const Page = () => {
   const { user } = useKindeBrowserClient();
   const [companyId, setCompanyId] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [rooms, setRooms] = useState<unknown[]>([]);
-  const [companyName, setCompanyName] = useState<string>('');
+  const [companyName, setCompanyName] = useState<string>("");
 
-  const fetchCompanyId = async () => {
-    // Vérifier si il y a un user connecté
-    if (user) {
+  // Récupérer companyId
+  useEffect(() => {
+    const fetchCompanyId = async () => {
+      if (!user) return;
+
       try {
         const response = await fetch("/api/users", {
           method: "POST",
@@ -32,48 +29,55 @@ const page = () => {
           }),
         });
 
-        // Récupérer les données de l'utilisateur
         const data = await response.json();
+        console.log("Réponse API users:", data); // Debug
 
-        // Mettre à jour le companyId
-        setCompanyId(data.companyId || null);
-        setLoading(false);
+        if (data.companyId) {
+          setCompanyId(data.companyId);
+        } else {
+          console.warn("companyId non trouvé dans la réponse API");
+        }
+
       } catch (error) {
-        console.error(error);
-        setCompanyId(null);
+        console.error("Erreur lors de la récupération du companyId :", error);
       }
-    }
-  };
+    };
 
-  const fetchRooms = async () => {
-    if (companyId) {
+    fetchCompanyId();
+  }, [user]);
+
+  // Récupérer les rooms après l'obtention de companyId
+  useEffect(() => {
+    const fetchRooms = async () => {
+      if (!companyId) return;
+
       setLoading(true);
       try {
-
         const response = await fetch(`/api/rooms?companyId=${companyId}`);
         if (!response.ok) {
           throw new Error("Erreur lors de la récupération des salles");
         }
 
         const data = await response.json();
-        setRooms(data.rooms);
-        setCompanyName(data.companyName);
-        setLoading(false);
-        
+        console.log("Réponse API rooms:", data); // Debug
+
+        setRooms(data.rooms || []);
+        setCompanyName(data.company || "Nom inconnu");
+
       } catch (error) {
         console.error(error);
+      } finally {
+        setLoading(false);
       }
-    }
-  }
-
-  // Appel de la fonction fetchCompanyId au chargement de la page
-  useEffect(() => {
-    const initializeData = async () => {
-      await fetchCompanyId();
-      await fetchRooms();
     };
-    initializeData();
-  }, [user]);
+
+    fetchRooms();
+  }, [companyId]);
+
+  // Vérifier si le nom de l'entreprise est mis à jour
+  useEffect(() => {
+    console.log("Company name mis à jour :", companyName);
+  }, [companyName]);
 
   if (loading) {
     return (
@@ -88,14 +92,12 @@ const page = () => {
   return (
     <Wrapper>
       <div>
-        <div>
-          <div className="badge badge-secondary badge-outline">
-            Company ID: {companyId}
-          </div>
+        <div className="badge badge-secondary badge-outline">
+          {companyName}
         </div>
       </div>
     </Wrapper>
   );
 };
 
-export default page;
+export default Page;
