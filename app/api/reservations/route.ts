@@ -35,9 +35,16 @@ export async function POST(request: NextRequest) {
     if (!user) {
       return NextResponse.json(
         { message: "L'utilisateur n'est pas trouvé" },
-        { status: 400 }
+        { status: 404 }
       );
     }
+
+    // Creer des reservation pour chaque timeSlot
+    const reservations = await Promise.all(
+      timeSlots.map(async (timeSlot) => {
+        // Vérifier si le créneau est bien formé
+      })
+    )
     
   } catch (error) {
     console.error("Erreur api reservations", error);
