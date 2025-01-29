@@ -129,7 +129,7 @@ const Page: React.FC = () => {
                       className="shadow-sm w-full h-48 object-cover rounded-xl"
                     />
 
-                    <div className="md:ml-4 md:w-2/3">
+                    <div className="mt-4">
                       <div className="flex items-center">
                         <div className="badge badge-secondary">
                           <Users className="mr-2 w-4" />
@@ -138,7 +138,7 @@ const Page: React.FC = () => {
                         <h1 className="font-bold text-xl ml-2">{room.name}</h1>
                       </div>
                       <p className="text-sm my-2 text-gray-500">
-                        {room.description}
+                        {room.description.length > 100 ? `${room.description.slice(0, 100)}...` : room.description}
                       </p>
                     </div>
                   </li>
