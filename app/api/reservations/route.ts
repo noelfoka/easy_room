@@ -46,6 +46,9 @@ export async function POST(request: NextRequest) {
         if (!timeSlot.includes(" - ")) {
           throw new Error(`Le créneau n'est pas bien formé: ${timeSlot}`);
         }
+
+        // Extraire les dates de début et de fin
+        const [startDate, endDate] = timeSlot.split(" - ");
       })
     )
     
