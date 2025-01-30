@@ -8,6 +8,14 @@ export async function POST(request: Request) {
 
     // recuperation des données de la requête
     const { roomId, reservationDate } = await request.json();
+
+    // Vérifier si les champs requis sont présents
+    if (!roomId || !reservationDate) {
+      return NextResponse.json(
+        { message: "Les informations sont incomplètes" },
+        { status: 400 }
+      );
+    }
     
   } catch (error) {
     console.error("Erreur api disponibilities", error);
