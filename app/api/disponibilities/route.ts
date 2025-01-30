@@ -58,6 +58,10 @@ export async function POST(request: Request) {
         roomId: roomId,
         reservationDate: reservationDate,
       },
+      select: {
+        startTime: true,
+        endTime: true,
+      },
     });
     
   } catch (error) {
