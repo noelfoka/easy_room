@@ -22,7 +22,7 @@ export async function POST(request: Request) {
 
     if (datePart.length !== 3 || datePart[2].length !== 4) {
       return NextResponse.json(
-        { message: "La date de réservation est incorrecte" },
+        { message: "La date de réservation est incorrecte. Utiliser le format jj/mm/aaaa" },
         { status: 400 }
       );
     }
