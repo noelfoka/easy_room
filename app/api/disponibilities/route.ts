@@ -16,6 +16,16 @@ export async function POST(request: Request) {
         { status: 400 }
       );
     }
+
+    // Validation du format de la date
+    const datePart = reservationDate.split("/");
+
+    if (datePart.length !== 3 || datePart[2].length !== 4) {
+      return NextResponse.json(
+        { message: "La date de réservation est incorrecte" },
+        { status: 400 }
+      );
+    }
     
   } catch (error) {
     console.error("Erreur api disponibilities", error);
