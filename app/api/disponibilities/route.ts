@@ -37,6 +37,20 @@ export async function POST(request: Request) {
         { status: 400 }
       );
     }
+
+    // Vérifier si la salle recuperée existe
+    const room = await prisma.room.findUnique({
+      where: {
+        id: roomId,
+      },
+    });
+
+    if (!room) {
+      return NextResponse.json(
+        { message: "La salle n'existe pas" },
+        { status: 400 }
+      );
+    }
     
   } catch (error) {
     console.error("Erreur api disponibilities", error);
