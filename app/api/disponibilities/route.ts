@@ -63,6 +63,8 @@ export async function POST(request: Request) {
         endTime: true,
       },
     });
+
+    return NextResponse.json(room, existingReservations);
     
   } catch (error) {
     console.error("Erreur api disponibilities", error);
