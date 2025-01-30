@@ -26,6 +26,17 @@ export async function POST(request: Request) {
         { status: 400 }
       );
     }
+
+    // la date
+    const date = new Date(`${datePart[2]}-${datePart[1]}-${datePart[0]}`);
+
+    // Vérifier si la date est valide
+    if (isNaN(date.getTime())) {
+      return NextResponse.json(
+        { message: "La date de réservation est invalide" },
+        { status: 400 }
+      );
+    }
     
   } catch (error) {
     console.error("Erreur api disponibilities", error);
