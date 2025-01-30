@@ -51,6 +51,14 @@ export async function POST(request: Request) {
         { status: 400 }
       );
     }
+
+    // Récupérer toutes les reservations de cette salle à la date donnée
+    const existingReservations = await prisma.reservation.findMany({
+      where: {
+        roomId: roomId,
+        reservationDate: reservationDate,
+      },
+    });
     
   } catch (error) {
     console.error("Erreur api disponibilities", error);
