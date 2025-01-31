@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 "use client"
 
+import Notification from '@/app/components/Notification'
 import Wrapper from '@/app/components/Wrapper'
 import { useKindeBrowserClient } from '@kinde-oss/kinde-auth-nextjs'
 import React, { useState } from 'react'
@@ -11,7 +12,7 @@ const page = ({ params} : { params: { roomId: string } }) => {
   const { user } = useKindeBrowserClient();
 
   // Les variables d'etat
-  const [notification, setNotification] = useState<string | null>(null);
+  const [notification, setNotification] = useState<string>("");
 
   const closeNotification = () => {
     setNotification(null);
@@ -19,7 +20,9 @@ const page = ({ params} : { params: { roomId: string } }) => {
 
   return (
    <Wrapper>
-    <div>Reservation de la salle {params.roomId}</div>
+    {notification && (
+      <Notification message={notification} onClose={closeNotification}></Notification>
+    )}
    </Wrapper>
   )
 }
