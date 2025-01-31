@@ -76,7 +76,7 @@ export async function POST(request: NextRequest) {
     );
 
   } catch (error) {
-    console.error("Erreur api reservations", error);
+    console.log("Erreur api reservations", error);
     return NextResponse.json(
       {
         message:

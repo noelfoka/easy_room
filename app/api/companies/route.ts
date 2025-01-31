@@ -1,6 +1,5 @@
 import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
-import { disconnect } from "process";
 
 // Api de création de companies
 export async function POST(request: Request) {

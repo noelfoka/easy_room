@@ -81,6 +81,15 @@ Content-Type: application/json
 {
   "email": "nomgnenoel@gmail.com",
   "roomId": "cm6i03ghx0000viysynfo9ccx",
-  "reservationDate": "2023/05/01",
+  "reservationDate": "25/10/2025",
   "timeSlots": ["13:00 - 17:00", "20:00 - 24:00"]
+}
+
+###
+POST http://localhost:3000/api/disponibilities
+Content-Type: application/json
+
+{
+  "roomId": "cm6i03ghx0000viysynfo9ccx",
+  "reservationDate": "25/10/2025"
 }

@@ -8,6 +8,7 @@ export async function POST(request: Request) {
 
     // recuperation des données de la requête
     const { roomId, reservationDate } = await request.json();
+    console.log("reponse de la requete",{ roomId, reservationDate })
 
     // Vérifier si les champs requis sont présents
     if (!roomId || !reservationDate) {
@@ -64,10 +65,10 @@ export async function POST(request: Request) {
       },
     });
 
-    return NextResponse.json(room, existingReservations);
+    return NextResponse.json({room, existingReservations}, { status: 200 });
     
   } catch (error) {
-    console.error("Erreur api disponibilities", error);
+    console.log("Erreur api disponibilities", error);
     return NextResponse.json(
       { message: "Une erreur est survenue lors de la récupération des salles disponibles" },
       { status: 500 }
