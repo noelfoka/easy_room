@@ -8,7 +8,6 @@ export async function POST(request: Request) {
 
     // recuperation des données de la requête
     const { roomId, reservationDate } = await request.json();
-    console.log("reponse de la requete",{ roomId, reservationDate })
 
     // Vérifier si les champs requis sont présents
     if (!roomId || !reservationDate) {

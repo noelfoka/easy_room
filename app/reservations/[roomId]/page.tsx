@@ -1,3 +1,5 @@
+"use client"
+
 import Wrapper from '@/app/components/Wrapper'
 import React from 'react'
 
