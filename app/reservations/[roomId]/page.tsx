@@ -4,7 +4,25 @@
 import Notification from '@/app/components/Notification'
 import Wrapper from '@/app/components/Wrapper'
 import { useKindeBrowserClient } from '@kinde-oss/kinde-auth-nextjs'
+import { Room } from '@prisma/client'
 import React, { useState } from 'react'
+
+interface Room {
+  id: string;
+  name: string;
+  capacity: number;
+  description: string;
+}
+
+interface Reservation {
+  startTime: string;
+  endTime: string;
+}
+
+interface RoomData {
+  room: Room;
+  existingReservations: Reservation[];
+}
 
 const page = ({ params} : { params: { roomId: string } }) => {
 
@@ -15,7 +33,7 @@ const page = ({ params} : { params: { roomId: string } }) => {
   const [notification, setNotification] = useState<string>("");
 
   const closeNotification = () => {
-    setNotification(null);
+    setNotification("");
   };
 
   return (
@@ -23,6 +41,8 @@ const page = ({ params} : { params: { roomId: string } }) => {
     {notification && (
       <Notification message={notification} onClose={closeNotification}></Notification>
     )}
+
+    <div>Infos</div>
    </Wrapper>
   )
 }
