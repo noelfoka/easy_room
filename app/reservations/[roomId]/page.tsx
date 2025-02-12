@@ -33,7 +33,17 @@ const page = ({ params} : { params: { roomId: string } }) => {
   useEffect(() => {
     const today = new Date();
     const formatedDate = today.toString().split('T')[0];
-  })
+    setSelectedDate(formatedDate);
+  });
+
+  // Récupérer les données du backend
+  const fetchRoomData = async () => {
+    try {
+      const response = await fetch(`/api/rooms/${params.roomId}`);
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
   // Les variables d'etat
   const [notification, setNotification] = useState<string>("");
