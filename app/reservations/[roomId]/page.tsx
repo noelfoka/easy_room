@@ -74,8 +74,11 @@ const page = ({ params} : { params: { roomId: string } }) => {
   }
 
   const calculateAvailablesSlots = (reservations: Reservation[]) => {
-    //Initialiser un tableau pour stocker les heures disponibles
+    // Initialiser un tableau pour stocker les heures disponibles
     const slots : string[] = [];
+
+    // Définir les heures de travail
+    const workHours = [{start: "08:00", end: "22:00"}];
   }
 
   // Les variables d'etat
