@@ -28,6 +28,7 @@ const page = ({ params} : { params: { roomId: string } }) => {
 
   // recupérer l'utilisateur connecté
   const { user } = useKindeBrowserClient();
+  const [selectedDate, setSelectedDate] = useState('');
 
   useEffect(() => {
     const today = new Date();
