@@ -39,7 +39,12 @@ const page = ({ params} : { params: { roomId: string } }) => {
   // Récupérer les données du backend
   const fetchRoomData = async () => {
     try {
-      const response = await fetch(`/api/rooms/${params.roomId}`);
+      const response = await fetch(`/api/disponibilities`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
     } catch (error) {
       console.error(error);
     }
