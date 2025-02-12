@@ -33,21 +33,28 @@ const page = ({ params} : { params: { roomId: string } }) => {
 
   useEffect(() => {
     const today = new Date();
-    const formatedDate = today.toString().split('T')[0];
+    const formatedDate = today.toISOString().split('T')[0];
     setSelectedDate(formatedDate);
-  });
+  }, []);
+
+  useEffect(() => {
+    if(selectedDate) {
+      fetchRoomData();
+    }
+  }, [selectedDate]);
 
   // Récupérer les données du backend
   const fetchRoomData = async () => {
+    console.log(params.roomId, selectedDate.split(' - ').reverse().join('/'))
     try {
-      const response = await fetch(`/api/disponibilities`, {
+      const response = await fetch("/api/disponibilities", {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
           roomId: params.roomId,
-          reservationDate: selectedDate.split(' - ').reverse().join('/')
+          reservationDate: selectedDate.split('-').reverse().join('/')
         })
       });
 
@@ -79,7 +86,7 @@ const page = ({ params} : { params: { roomId: string } }) => {
       <Notification message={notification} onClose={closeNotification}></Notification>
     )}
 
-    <div>Infos</div>
+    <div>{roomData?.room.name}</div>
    </Wrapper>
   )
 }
