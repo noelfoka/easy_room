@@ -82,6 +82,9 @@ const page = ({ params} : { params: { roomId: string } }) => {
 
     // Obtenir la date et l'heure actuelles
     const today = new Date();
+
+    // Convertir la date selectionnée en un objet Date
+    const selectedDateObject = new Date(selectedDate);
   }
 
   // Les variables d'etat
