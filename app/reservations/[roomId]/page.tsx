@@ -79,6 +79,9 @@ const page = ({ params} : { params: { roomId: string } }) => {
 
     // Définir les heures de travail
     const workHours = [{start: "08:00", end: "22:00"}];
+
+    // Obtenir la date et l'heure actuelles
+    const today = new Date();
   }
 
   // Les variables d'etat
