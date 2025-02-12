@@ -63,7 +63,7 @@ const page = ({ params} : { params: { roomId: string } }) => {
         const data = await response.json();
         setRoomData(data);
 
-        // calculateAvailablesSlots(data.existingReservations);
+        calculateAvailablesSlots(data.existingReservations);
       } else {
         console.error('Erreur lors de la récupération des salles disponibles');
       }
@@ -71,6 +71,11 @@ const page = ({ params} : { params: { roomId: string } }) => {
     } catch (error) {
       console.error(error);
     }
+  }
+
+  const calculateAvailablesSlots = (reservations: Reservation[]) => {
+    //Initialiser un tableau pour stocker les heures disponibles
+    const slots : string[] = [];
   }
 
   // Les variables d'etat
