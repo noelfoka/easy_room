@@ -44,7 +44,17 @@ const page = ({ params} : { params: { roomId: string } }) => {
         headers: {
           'Content-Type': 'application/json',
         },
+        body: JSON.stringify({
+          roomId: params.roomId,
+          reservationDate: selectedDate.split(' - ').reverse().join('/')
+        })
       });
+
+      // Vérifier si la réponse est ok
+      if (!response.ok) {
+        throw new Error('Erreur lors de la récupération des disponibilités');
+      }
+
     } catch (error) {
       console.error(error);
     }
