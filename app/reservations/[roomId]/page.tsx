@@ -29,6 +29,7 @@ const page = ({ params} : { params: { roomId: string } }) => {
   // recupérer l'utilisateur connecté
   const { user } = useKindeBrowserClient();
   const [selectedDate, setSelectedDate] = useState('');
+  const [roomData, setRoomData] = useState<RoomData | null>(null);
 
   useEffect(() => {
     const today = new Date();
@@ -51,8 +52,13 @@ const page = ({ params} : { params: { roomId: string } }) => {
       });
 
       // Vérifier si la réponse est ok
-      if (!response.ok) {
-        throw new Error('Erreur lors de la récupération des disponibilités');
+      if (response.ok) {
+        const data = await response.json();
+        setRoomData(data);
+
+        // calculateAvailablesSlots(data.existingReservations);
+      } else {
+        console.error('Erreur lors de la récupération des salles disponibles');
       }
 
     } catch (error) {
