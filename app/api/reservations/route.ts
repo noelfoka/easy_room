@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 // Api route pour les reservations
 import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
@@ -120,5 +121,15 @@ export async function GET(request: Request) {
   } catch (error) {
       console.error('Error in API:', error);
       return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
+  }
+}
+
+// Api pour suprimer les réservations
+export async function DELETE(request: Request) {
+  try {
+    
+  } catch (error) {
+    console.error('Erreur de supression des reservations:', error);
+    return NextResponse.json({ error: 'Erreur lors de la suppression des réservations' }, { status: 500 });
   }
 }
