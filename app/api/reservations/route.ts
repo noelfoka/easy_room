@@ -127,7 +127,11 @@ export async function GET(request: Request) {
 // Api pour suprimer les réservations
 export async function DELETE(request: Request) {
   try {
-    
+    // recuperation des données de la requête
+    const { id } = await request.json();
+    if (!id) {
+      return NextResponse.json({ message: "id manquant" }, { status: 400 });
+    }
   } catch (error) {
     console.error('Erreur de supression des reservations:', error);
     return NextResponse.json({ error: 'Erreur lors de la suppression des réservations' }, { status: 500 });
