@@ -1,5 +1,5 @@
 // Api route pour les reservations
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
 
 interface ReservationRequest {
@@ -9,7 +9,8 @@ interface ReservationRequest {
   timeSlots: string[];
 }
 
-export async function POST(request: NextRequest) {
+// Api pour créer les réservations
+export async function POST(request: Request) {
   try {
     // recuperation des données de la requête
     const body = await request.text();
@@ -81,6 +82,22 @@ export async function POST(request: NextRequest) {
       {
         message:
           "Une erreur est survenue lors de la création de la reservation",
+      },
+      { status: 500 }
+    );
+  }
+}
+
+// Api pour récupérer les réservations
+export async function GET(request:Request) {
+  try {
+    
+  } catch (error) {
+    console.log("Erreur api reservations", error);
+    return NextResponse.json(
+      {
+        message:
+          "Une erreur est survenue lors de la récupération des reservations",
       },
       { status: 500 }
     );

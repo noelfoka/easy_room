@@ -133,8 +133,6 @@ const page = ({ params }: { params: { roomId: string } }) => {
   const handleSlotClick = (slot: string) => {
     let updatedSlots: string[]
 
-    console.log(slot)
-
     if (selectedSlots.includes(slot)) {
       updatedSlots = selectedSlots.filter((s) => s !== slot)
     } else {
@@ -246,7 +244,7 @@ const page = ({ params }: { params: { roomId: string } }) => {
                     {roomData.room.description}
                   </p>
 
-                  <button className="btn btn-outline mt-4 btn-sm btn-secondary md:hidden block" onClick={() => (document.getElementById('my_modal') as HTMLDialogElement).showModal()}>Choisir un créneau</button>
+                  <button className="btn btn-outline mt-4 btn-sm btn-secondary md:hidden block" onClick={() => (document.getElementById('my_modal') as HTMLDialogElement).showModal()}>Choisir une plage horaire</button>
 
                 </div>
                 <div className='hidden md:block ml-4 w-2/3 '>
