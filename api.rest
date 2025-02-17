@@ -93,3 +93,6 @@ Content-Type: application/json
   "roomId": "cm6i03ghx0000viysynfo9ccx",
   "reservationDate": "25/10/2025"
 }
+
+###
+GET http://localhost:3000/api/reservations?email=nomgnenoel@gmail.com

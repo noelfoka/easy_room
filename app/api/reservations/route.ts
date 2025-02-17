@@ -89,52 +89,36 @@ export async function POST(request: Request) {
 }
 
 // Api pour récupérer les réservations
-export async function GET(request:Request) {
+export async function GET(request: Request) {
   try {
 
-    // recuperation des données de la requête
-    const { searchParams } = new URL(request.url);
+      const { searchParams } = new URL(request.url)
+      const email = searchParams.get('email')
 
-    // recuperation des paramètres de la requête
-    const email = searchParams.get("email");
-
-    // Vérifier si les champs requis sont présents
-    if (!email) {
-      return NextResponse.json(
-        {
-          message: "L'email est requis pour récupérer les reservations",
-        },
-        { status: 400 }
-      );
-    }
-
-    // Recherche de l'utilisateur par email
-    const user = await prisma.user.findUnique({
-      where: {
-        email: email,
-      },
-      include: {
-        reservations: {
-          room: true
-        }
+      if (!email) {
+          return NextResponse.json({ message: "email manquant" }, { status: 400 });
       }
-    });
+      const user = await prisma.user.findUnique({
+          where: { email },
+          include: {
+              reservations: {
+                  include: {
+                      room: true
+                  }
+              }
+          }
+      })
 
-    // Si l'utilisateur n'est pas trouvé
-    if (!user) {
-      return NextResponse.json(
-        { message: "L'utilisateur n'est pas trouvé" },
-        { status: 404 }
-      );
-    }
+      if (!user) {
+          return NextResponse.json({ message: 'Utilisateur non trouvé' }, { status: 404 });
+      }
+
+      const reservationWithoutUserId = user.reservations.map(({ userId, ...rest }) => rest)
+
+      return NextResponse.json({ reservationWithoutUserId }, { status: 200 });
+
   } catch (error) {
-    console.log("Erreur api reservations", error);
-    return NextResponse.json(
-      {
-        message:
-          "Une erreur est survenue lors de la récupération des reservations",
-      },
-      { status: 500 }
-    );
+      console.error('Error in API:', error);
+      return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
   }
 }
