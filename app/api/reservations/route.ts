@@ -91,7 +91,11 @@ export async function POST(request: Request) {
 // Api pour récupérer les réservations
 export async function GET(request:Request) {
   try {
-    
+
+    // recuperation des données de la requête
+    const { searchParams } = new URL(request.url);
+
+    const email = searchParams.get("email");
   } catch (error) {
     console.log("Erreur api reservations", error);
     return NextResponse.json(
