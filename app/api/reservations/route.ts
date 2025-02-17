@@ -95,7 +95,18 @@ export async function GET(request:Request) {
     // recuperation des données de la requête
     const { searchParams } = new URL(request.url);
 
+    // recuperation des paramètres de la requête
     const email = searchParams.get("email");
+
+    // Vérifier si les champs requis sont présents
+    if (!email) {
+      return NextResponse.json(
+        {
+          message: "L'email est requis pour récupérer les reservations",
+        },
+        { status: 400 }
+      );
+    }
   } catch (error) {
     console.log("Erreur api reservations", error);
     return NextResponse.json(
