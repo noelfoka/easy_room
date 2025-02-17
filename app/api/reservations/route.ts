@@ -107,6 +107,18 @@ export async function GET(request:Request) {
         { status: 400 }
       );
     }
+
+    // Recherche de l'utilisateur par email
+    const user = await prisma.user.findUnique({
+      where: {
+        email: email,
+      },
+      include: {
+        reservations: {
+          room: true
+        }
+      }
+    });
   } catch (error) {
     console.log("Erreur api reservations", error);
     return NextResponse.json(
