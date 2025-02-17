@@ -96,3 +96,11 @@ Content-Type: application/json
 
 ###
 GET http://localhost:3000/api/reservations?email=nomgnenoel@gmail.com
+
+###
+DELETE http://localhost:3000/api/reservations
+Content-Type: application/json
+
+{
+  "id": "cm731aefb000bvio0r3u7sa24"
+}

@@ -139,6 +139,11 @@ export async function DELETE(request: Request) {
         id: id,
       },
     });
+
+    return NextResponse.json(
+      { message: "La reservation a été suprimée avec sucès", deleteReservation },
+      { status: 200 }
+    );
   } catch (error) {
     console.error('Erreur de supression des reservations:', error);
     return NextResponse.json({ error: 'Erreur lors de la suppression des réservations' }, { status: 500 });
