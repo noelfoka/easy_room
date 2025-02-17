@@ -132,6 +132,13 @@ export async function DELETE(request: Request) {
     if (!id) {
       return NextResponse.json({ message: "id manquant" }, { status: 400 });
     }
+
+    // Supprimer la reservation par id
+    const deleteReservation = await prisma.reservation.delete({
+      where: {
+        id: id,
+      },
+    });
   } catch (error) {
     console.error('Erreur de supression des reservations:', error);
     return NextResponse.json({ error: 'Erreur lors de la suppression des réservations' }, { status: 500 });
