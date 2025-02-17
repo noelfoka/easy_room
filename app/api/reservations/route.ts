@@ -119,6 +119,14 @@ export async function GET(request:Request) {
         }
       }
     });
+
+    // Si l'utilisateur n'est pas trouvé
+    if (!user) {
+      return NextResponse.json(
+        { message: "L'utilisateur n'est pas trouvé" },
+        { status: 404 }
+      );
+    }
   } catch (error) {
     console.log("Erreur api reservations", error);
     return NextResponse.json(
