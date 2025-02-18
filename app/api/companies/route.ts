@@ -136,6 +136,16 @@ export async function DELETE(request: Request) {
       },
     });
 
+    // Supprimer les réservations
+    await prisma.reservation.deleteMany({
+      where: { room: { companyId: id } },
+    });
+
+    // Suprimer salle
+    await prisma.room.deleteMany({
+      where: { companyId: id },
+    });
+
     // Supprimer la company
     await prisma.company.delete({
       where: { id },

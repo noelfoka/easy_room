@@ -32,6 +32,15 @@ const page = () => {
   const { user } = useKindeBrowserClient();
   const [reservations, setReservations] = useState<Reservation[]>([]);
 
+  // Supprimer les réservations expirées
+  const cleanupExpiredReservation = async () => {
+    try {
+      await fetch('/api/cleanupReservations', { method: 'DELETE' });
+    } catch (error) {
+      console.error("Erreur lors du nettoyage des réservations :", error);
+    }
+  };
+
   const fetchReservations = async () => {
     if (!user?.email) return;
     try {
@@ -68,6 +77,7 @@ const page = () => {
 
   useEffect(() => {
     fetchReservations();
+    cleanupExpiredReservation();
   }, [user]);
 
   return (
