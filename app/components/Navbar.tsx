@@ -72,6 +72,15 @@ const Navbar = () => {
             >
               Réserver
             </Link>
+
+            <Link
+              href="/my-reservations"
+              className={`link link-hover font-bold ${
+                isActive("/my-reservations") ? "text-secondary" : ""
+              }`}
+            >
+              Mes reservations
+            </Link>
           </div>
           <LogoutLink className="btn btn-secondary btn-sm hidden md:flex">
             Déconnexion
@@ -105,6 +114,15 @@ const Navbar = () => {
             }`}
           >
             Réserver
+          </Link>
+
+          <Link
+            href="/my-reservations"
+            className={`link link-hover font-bold ${
+              isActive("/my-reservations") ? "text-secondary" : ""
+            }`}
+          >
+            Mes reservations
           </Link>
 
           <LogoutLink className="btn btn-secondary btn-sm">

@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-// Api route pour les reservations
+// Api pour les reservations
 import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
 
